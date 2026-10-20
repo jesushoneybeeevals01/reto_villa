@@ -7,6 +7,8 @@
   "use strict";
 
   const root = document.documentElement;
+  /* La clase se pone aquí y no en el HTML: si este archivo no carga, nada queda oculto. */
+  root.classList.add("js");
   const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const MOTION_KEY = "cerca:motion";
 
@@ -137,12 +139,17 @@
 
   /* Enlace activo de la navegación según la sección visible */
   const navLinks = $$(".nav__links a[href^='#']");
-  const navTargets = [$("#inicio"), ...navLinks.map((a) => $(a.getAttribute("href")))].filter(Boolean);
+  const navTargets = $$("main > section");
   if ("IntersectionObserver" in window && navTargets.length) {
     const navIO = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+          if (!entry.isIntersecting) {
+            navLinks.forEach((a) => {
+              if (a.getAttribute("href") === `#${entry.target.id}`) a.removeAttribute("aria-current");
+            });
+            return;
+          }
           navLinks.forEach((a) => {
             if (a.getAttribute("href") === `#${entry.target.id}`) a.setAttribute("aria-current", "location");
             else a.removeAttribute("aria-current");
@@ -314,6 +321,8 @@
     function resize() {
       const rect = canvas.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      /* La barra del navegador móvil dispara resize sin cambiar el tamaño del canvas. */
+      if (nodes.length && rect.width === W && rect.height === H && canvas.width === Math.max(1, Math.round(W * dpr))) return;
       W = rect.width;
       H = rect.height;
       canvas.width = Math.max(1, Math.round(W * dpr));
@@ -843,7 +852,7 @@
 
     const frame = (now) => {
       raf = 0;
-      const dt = last ? now - last : 0;
+      const dt = last ? Math.min(now - last, 100) : 0;
       last = now;
       if (canRun()) {
         progress += dt / DURATION;
@@ -899,6 +908,7 @@
       new IntersectionObserver(
         ([entry]) => {
           visible = entry.isIntersecting;
+          container.classList.toggle("is-visible", visible);
           tick();
         },
         { threshold: 0.3 }
