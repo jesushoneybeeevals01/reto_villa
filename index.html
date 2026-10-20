@@ -22,6 +22,11 @@
       try { t = localStorage.getItem("cerca:theme"); } catch (e) {}
       if (t !== "light" && t !== "dark") t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
       document.documentElement.dataset.theme = t;
+      var metas = document.querySelectorAll('meta[name="theme-color"]');
+      for (var i = 0; i < metas.length; i++) {
+        metas[i].removeAttribute("media");
+        metas[i].setAttribute("content", t === "light" ? "#f4f8ff" : "#071225");
+      }
     })();
   </script>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -131,6 +136,8 @@
             <span data-theme-label>Modo claro</span>
           </button>
           <button class="btn btn--ghost" type="button" data-motion-toggle aria-label="Pausar animaciones">
+            <svg class="icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+            <svg class="icon-play" aria-hidden="true"><use href="#i-play"/></svg>
             <span data-motion-label>Pausar animaciones</span>
           </button>
         </div>
@@ -384,7 +391,7 @@
 
         <h3 class="sub-head" data-reveal>Lo que hoy se interpone</h3>
         <div class="barriers" data-stagger>
-          <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-help"/></svg></span><h4 class="h-card">No sé a quién acudir</h4><p>Hay líneas, EPS, colegios y secretarías, pero no siempre es claro cuál puede orientar lo que buscas.</p></article>
+          <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--azure"><svg aria-hidden="true"><use href="#i-help"/></svg></span><h4 class="h-card">No sé a quién acudir</h4><p>Hay líneas, EPS, colegios y secretarías, pero no siempre es claro cuál puede orientar lo que buscas.</p></article>
           <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--violet"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><h4 class="h-card">Información regada y sin fecha</h4><p>Números que ya no contestan, enlaces caídos y publicaciones sin fecha que no sabes si siguen vigentes.</p></article>
           <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--cyan"><svg aria-hidden="true"><use href="#i-lock"/></svg></span><h4 class="h-card">La pena y el qué dirán</h4><p>Preguntar por salud mental todavía da pena, y muchos prefieren no buscar antes que sentirse señalados.</p></article>
           <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--lime"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h4 class="h-card">Todo suena a trámite</h4><p>Páginas técnicas, palabras difíciles y formularios largos que desaniman antes de empezar.</p></article>
@@ -518,16 +525,16 @@
                     <defs>
                       <linearGradient id="routeG" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient>
                     </defs>
-                    <path d="M0 40H400M0 90H400M0 140H400M0 190H400M60 0V230M130 0V230M200 0V230M270 0V230M340 0V230" stroke="rgba(255,255,255,.06)" vector-effect="non-scaling-stroke"/>
-                    <path d="M-10 205 L175 112 L410 58M92 -10 L150 240M250 -10 L300 240" stroke="rgba(255,255,255,.13)" stroke-width="3" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-                    <path d="M-10 172 C70 142 120 207 200 177 S330 112 410 127" stroke="rgba(69,220,247,.26)" stroke-width="7" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                    <path class="map__grid" d="M0 40H400M0 90H400M0 140H400M0 190H400M60 0V230M130 0V230M200 0V230M270 0V230M340 0V230" vector-effect="non-scaling-stroke"/>
+                    <path class="map__roads" d="M-10 205 L175 112 L410 58M92 -10 L150 240M250 -10 L300 240" stroke-width="3" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                    <path class="map__river" d="M-10 172 C70 142 120 207 200 177 S330 112 410 127" stroke-width="7" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
                     <path class="map__route" d="M120 133 C150 128 185 108 208 92" stroke="url(#routeG)" stroke-width="2.5" stroke-dasharray="5 6" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
                   </svg>
                   <span class="pin pin--you" style="left:30%;top:58%"></span>
                   <span class="pin" style="left:52%;top:40%;--d:.4s"></span>
                   <span class="pin" style="left:68%;top:32%;--d:.8s"></span>
-                  <span class="pin" style="left:40%;top:20%;--d:1.2s;--c:var(--cyan)"></span>
-                  <span class="pin" style="left:84%;top:28%;--d:1.6s;--c:var(--cyan)"></span>
+                  <span class="pin" style="left:40%;top:20%;--d:1.2s;--c:var(--sky)"></span>
+                  <span class="pin" style="left:84%;top:28%;--d:1.6s;--c:var(--sky)"></span>
                   <span class="map__legend">Mapa ilustrativo</span>
                   <div class="map__card">
                     <p class="dir-row__name">Centro de orientación juvenil</p>
@@ -726,7 +733,7 @@
             <p class="tabpanel__body">Cada dato lleva un indicador de vigencia con texto e ícono, no solo con color. Si venció o tiene un reporte abierto, deja de mostrarse como vigente y aparecen otras opciones verificadas.</p>
           </div>
           <ul class="fresh__list">
-            <li class="fresh__item" style="--c: var(--lime)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-check"/></svg>Verificado</b><span>Revisado dentro de su ciclo de verificación.</span></div></li>
+            <li class="fresh__item" style="--c: var(--mint)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-check"/></svg>Verificado</b><span>Revisado dentro de su ciclo de verificación.</span></div></li>
             <li class="fresh__item" style="--c: var(--amber)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-clock"/></svg>Revisión próxima</b><span>Está por vencer: se muestra con un aviso visible.</span></div></li>
             <li class="fresh__item" style="--c: var(--text-3)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-flag"/></svg>En revisión</b><span>Venció o tiene un reporte abierto: deja de mostrarse como vigente.</span></div></li>
             <li class="source-note">Propuesta: ciclo de 30 días. El plan de operación define los plazos con cada fuente.</li>
@@ -744,7 +751,7 @@
           <h2 class="h-section" id="aud-title" data-reveal>Para quienes buscan ayuda. Y para quienes la acercan.</h2>
         </div>
         <div class="audiences" data-stagger>
-          <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-user"/></svg></span><h3 class="h-card">Jóvenes de Villavicencio</h3><p>Encuentra a dónde acudir desde tu celular, sin crear cuenta, sin dar tu nombre y sin que nadie te juzgue. Para ti o para alguien que te preocupa.</p></article>
+          <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--azure"><svg aria-hidden="true"><use href="#i-user"/></svg></span><h3 class="h-card">Jóvenes de Villavicencio</h3><p>Encuentra a dónde acudir desde tu celular, sin crear cuenta, sin dar tu nombre y sin que nadie te juzgue. Para ti o para alguien que te preocupa.</p></article>
           <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--violet"><svg aria-hidden="true"><use href="#i-school"/></svg></span><h3 class="h-card">Colegios y orientadores</h3><p>Una referencia confiable para compartir con tus estudiantes y un espacio para difundir las actividades de bienestar de tu institución.</p></article>
           <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--cyan"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><h3 class="h-card">Familias y comunidad</h3><p>Si alguien cercano pasa por un momento difícil, te muestra qué servicios pueden orientarte y cómo contactarlos.</p></article>
           <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--lime"><svg aria-hidden="true"><use href="#i-building"/></svg></span><h3 class="h-card">Quienes mantienen la información</h3><p>Pensado para que un rol responsable verifique teléfonos, horarios y rutas, con fuente, fecha y registro de cada cambio.</p></article>
@@ -908,6 +915,8 @@
             <span data-theme-label>Modo claro</span>
           </button>
           <button class="motion-toggle-text" type="button" data-motion-toggle aria-label="Pausar animaciones">
+            <svg class="icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+            <svg class="icon-play" aria-hidden="true"><use href="#i-play"/></svg>
             <span data-motion-label>Pausar animaciones</span>
           </button>
         </div>

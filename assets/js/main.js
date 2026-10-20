@@ -82,6 +82,10 @@
     set(value, persist) {
       root.dataset.theme = value;
       if (persist) storage.set(THEME_KEY, value);
+      $$('meta[name="theme-color"]').forEach((meta) => {
+        meta.removeAttribute("media");
+        meta.setAttribute("content", value === "light" ? "#f4f8ff" : "#071225");
+      });
       const next = value === "light" ? "oscuro" : "claro";
       $$("[data-theme-toggle]").forEach((btn) => {
         btn.setAttribute("aria-label", `Activar modo ${next}`);
@@ -96,12 +100,16 @@
     },
   };
 
+  let themeChosen = Boolean(storage.get(THEME_KEY));
   theme.set(theme.current, false);
   lightQuery.addEventListener?.("change", (e) => {
-    if (!storage.get(THEME_KEY)) theme.set(e.matches ? "light" : "dark", false);
+    if (!themeChosen) theme.set(e.matches ? "light" : "dark", false);
   });
   $$("[data-theme-toggle]").forEach((btn) =>
-    btn.addEventListener("click", () => theme.set(theme.current === "light" ? "dark" : "light", true))
+    btn.addEventListener("click", () => {
+      themeChosen = true;
+      theme.set(theme.current === "light" ? "dark" : "light", true);
+    })
   );
 
   /* ------------------------------------------------------------------------
@@ -1050,41 +1058,55 @@
       <div class="mascot mascot--${pose}">${mascotSVG()}</div>
       <p class="presenter__bubble">
         ${isPeek ? '<span class="presenter__name">Cerquita</span>' : ""}
-        <span class="presenter__say"><span class="presenter__ghost"></span><span class="presenter__typed"></span></span>
+        <span class="presenter__say"><span class="presenter__typed"></span><span class="presenter__caret"></span><span class="presenter__rest"></span></span>
       </p>`;
-    $(".presenter__ghost", host).textContent = say;
     const typed = $(".presenter__typed", host);
+    const rest = $(".presenter__rest", host);
     const svg = $(".mascot__svg", host);
+    const mascot = $(".mascot", host);
+    let typingDelay = 0;
     let typingTimer = 0;
 
-    const type = () => {
+    /* El texto pendiente ocupa su lugar (invisible), así las líneas no saltan al escribir. */
+    const show = (count) => {
+      typed.textContent = say.slice(0, count);
+      rest.textContent = say.slice(count);
+    };
+    const stopTyping = () => {
+      window.clearTimeout(typingDelay);
       window.clearInterval(typingTimer);
-      if (motion.paused) {
-        typed.textContent = say;
-        host.classList.add("is-typed");
-        return;
-      }
+      typingDelay = 0;
+      typingTimer = 0;
+    };
+    const finish = () => {
+      stopTyping();
+      show(say.length);
+      host.classList.add("is-typed");
+    };
+
+    const type = () => {
+      stopTyping();
+      if (motion.paused) return finish();
       let i = 0;
-      typed.textContent = "";
+      show(0);
       host.classList.remove("is-typed");
-      window.setTimeout(() => {
+      typingDelay = window.setTimeout(() => {
         typingTimer = window.setInterval(() => {
           i += 1;
-          typed.textContent = say.slice(0, i);
-          if (i >= say.length) {
-            window.clearInterval(typingTimer);
-            host.classList.add("is-typed");
-          }
+          show(i);
+          if (i >= say.length) finish();
         }, 32);
       }, 520);
     };
 
+    show(0);
     motion.onChange((paused) => {
-      if (paused) {
-        window.clearInterval(typingTimer);
-        typed.textContent = say;
-        host.classList.add("is-typed");
-      }
+      if (paused) finish();
+    });
+
+    /* Tras la primera aparición no vuelve a repetirla (por ejemplo, al reanudar animaciones). */
+    mascot.addEventListener("animationend", (e) => {
+      if (e.animationName === "mascot-pop") host.classList.add("is-popped");
     });
 
     /* Al tocarla, saluda y repite su frase. */
