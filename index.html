@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cerca — La ruta clara hacia la ayuda correcta en Villavicencio</title>
+  <meta name="description" content="Prototipo que ayuda a jóvenes de Villavicencio a encontrar información confiable, entender las rutas de apoyo y llegar al servicio que puede orientarlos. Cada dato con fuente oficial y fecha de consulta.">
+  <!-- Prototipo (TRL 4): no debe aparecer en buscadores como si fuera un servicio activo. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#05050a">
+  <meta property="og:title" content="Cerca — La ruta clara hacia la ayuda correcta">
+  <meta property="og:description" content="Información confiable y rutas de apoyo para jóvenes de Villavicencio, con fuente oficial y fecha de consulta en cada dato.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/geist-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <!-- Íconos (dibujados para este proyecto) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m5.7 5.7 12.6 12.6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 0 1-12.3 7.6L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H15a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h6.5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 10 9.5-5 9.5 5-9.5 5Z"/><path d="M6.5 12.2V16c0 1.6 2.5 3.2 5.5 3.2s5.5-1.6 5.5-3.2v-3.8M21.5 10v5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-4.5L20 8v13M2.5 21h19M9.5 21v-5h5v5M8.5 11h1M14.5 11h1"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.7M12 17.2h.01"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11.5l-2.2 4 2.2 4H5"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6v12M15 6v12"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3.5 19 11l-6.2 1.6L10 19.5Z" fill="#fff" stroke="#07070c" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#0b0b13"/><rect x="1.5" y="1.5" width="29" height="29" rx="8.5" stroke="url(#logo-g)" stroke-opacity=".7"/><path d="M9.5 22.5c0-7 6-12.5 13-12.5" stroke="url(#logo-g)" stroke-width="2.6" stroke-linecap="round"/><circle cx="9.5" cy="22.5" r="3" fill="#ff5c8a"/><circle cx="22.5" cy="10" r="3" fill="#bdf54a"/></symbol>
+    <linearGradient id="logo-g" x1="4" y1="28" x2="28" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#ff5c8a"/><stop offset=".5" stop-color="#c06bff"/><stop offset="1" stop-color="#6b93ff"/></linearGradient>
+  </svg>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <a class="skip-link" href="#ayuda">Saltar a líneas de apoyo</a>
+
+  <!-- Franja de ayuda inmediata: siempre con fuente y fecha de consulta -->
+  <aside class="helpbar" aria-label="Ayuda inmediata">
+    <div class="container helpbar__inner">
+      <p class="helpbar__lead"><span class="pulse" aria-hidden="true"></span>¿Necesitas hablar con alguien ahora?</p>
+      <ul class="helpbar__lines">
+        <li><a href="tel:106" aria-label="Llamar a la Línea 106, salud mental, 24 horas">Línea 106</a> <span class="helpbar__meta">· 24/7</span></li>
+        <li><a href="tel:018000931089" aria-label="Llamar gratis a Yo Te Escucho Villavicencio: 01 8000 931 089">Yo Te Escucho 01 8000 931 089</a> <span class="helpbar__meta">· gratuita</span></li>
+      </ul>
+      <p class="helpbar__source">Fuente: Directorio MinSalud · consultado 19 oct 2026</p>
+    </div>
+  </aside>
+
+  <header class="site-header" data-header>
+    <nav class="nav" aria-label="Principal">
+      <div class="container nav__inner">
+        <a class="brand" href="#inicio" aria-label="Cerca, ir al inicio">
+          <svg class="brand__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+          <span>Cerca</span>
+        </a>
+
+        <ul class="nav__links">
+          <li><a href="#reto">El reto</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#producto">Producto</a></li>
+          <li><a href="#confianza">Confianza</a></li>
+          <li><a href="#estado">Estado</a></li>
+          <li><a href="#preguntas">Preguntas</a></li>
+        </ul>
+
+        <div class="nav__actions">
+          <button class="icon-btn motion-toggle" type="button" data-motion-toggle aria-label="Pausar animaciones" title="Pausar animaciones">
+            <svg class="icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+            <svg class="icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+          </button>
+          <button class="help-btn" type="button" data-help-btn aria-expanded="false" aria-controls="help-panel">
+            <span class="pulse" aria-hidden="true"></span>
+            <span class="help-btn__text-long">Líneas de apoyo</span>
+            <span class="help-btn__text-short">Ayuda</span>
+          </button>
+          <a class="btn btn--primary btn--sm nav-cta" href="#producto">Ver el producto</a>
+          <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
+            <svg class="icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+            <svg class="icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu" hidden>
+        <ul>
+          <li><a href="#reto">El reto</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#producto">Producto</a></li>
+          <li><a href="#confianza">Confianza</a></li>
+          <li><a href="#estado">Estado</a></li>
+          <li><a href="#preguntas">Preguntas</a></li>
+        </ul>
+        <button class="btn btn--ghost" type="button" data-motion-toggle aria-label="Pausar animaciones">
+          <span data-motion-label>Pausar animaciones</span>
+        </button>
+      </div>
+
+      <div class="help-panel" id="help-panel" role="region" aria-labelledby="help-panel-title">
+        <p class="help-panel__title" id="help-panel-title" data-help-title tabindex="-1">Líneas de apoyo oficiales</p>
+        <p class="help-panel__intro">Te atienden personas de servicios institucionales. Cerca no es un servicio de salud ni de emergencias.</p>
+        <ul class="help-panel__list">
+          <li class="help-line">
+            <div>
+              <span class="help-line__num">106</span>
+              <span class="help-line__label">Línea Nacional de Teleorientación en Salud Mental · llamada gratuita · 24/7</span>
+            </div>
+            <div class="help-line__actions"><a href="tel:106" aria-label="Llamar a la Línea 106">Llamar</a></div>
+          </li>
+          <li class="help-line">
+            <div>
+              <span class="help-line__num">01 8000 931 089</span>
+              <span class="help-line__label">Yo Te Escucho Villavicencio · línea gratuita · WhatsApp 316 390 7010 · 24 horas</span>
+            </div>
+            <div class="help-line__actions">
+              <a href="tel:018000931089" aria-label="Llamar gratis a Yo Te Escucho">Llamar</a>
+              <a class="is-alt" href="https://wa.me/573163907010" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Yo Te Escucho, 316 390 7010 (se abre en una pestaña nueva)">WhatsApp</a>
+            </div>
+          </li>
+          <li class="help-line">
+            <div>
+              <span class="help-line__num">123</span>
+              <span class="help-line__label">Línea única de emergencias · si hay riesgo inmediato para la vida</span>
+            </div>
+            <div class="help-line__actions"><a href="tel:123" aria-label="Llamar a la línea de emergencias 123">Llamar</a></div>
+          </li>
+        </ul>
+        <p class="source-note"><strong>Fuentes:</strong> Directorio de salud mental y prevención del suicidio, MinSalud (consultado el 19 oct 2026) · Alcaldía de Villavicencio y Función Pública (consultados el 20 oct 2026). <a href="#ayuda">Ver detalle</a></p>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <!-- ================================================================ HERO -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__aurora">
+          <span class="blob blob--pink"></span>
+          <span class="blob blob--violet"></span>
+          <span class="blob blob--blue"></span>
+        </div>
+        <div class="hero__grid"></div>
+        <canvas class="hero__canvas" data-network></canvas>
+        <div class="hero__fade"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero__content">
+          <p class="hero__eyebrow">
+            <span class="chip chip--pink">Prototipo TRL 4</span>
+            <span class="hero__eyebrow-long" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>reto_01 · mente_sana_joven · villavicencio</span></span>
+            <span class="hero__eyebrow-short" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> reto_01 · villavicencio</span>
+            <span class="sr-only">Reto 01, mente sana joven, Villavicencio</span>
+          </p>
+
+          <h1 class="hero__title" id="hero-title">
+            <span class="sr-only">Encuentra ayuda confiable, verificada, humana, sin estigma, a tiempo y cerca de ti en Villavicencio.</span>
+            <span aria-hidden="true">
+              <span class="hero__title-line">Encuentra ayuda</span>
+              <span class="hero__title-line">
+                <span class="rotator" data-rotator>
+                  <span class="rotator__word">confiable.</span>
+                  <span class="rotator__word">verificada.</span>
+                  <span class="rotator__word">humana.</span>
+                  <span class="rotator__word">sin estigma.</span>
+                  <span class="rotator__word">a tiempo.</span>
+                  <span class="rotator__word">cerca de ti.</span>
+                </span>
+              </span>
+            </span>
+          </h1>
+
+          <p class="lead hero__sub">Cerca es un prototipo que te muestra qué servicio puede orientarte en Villavicencio y cómo llegar a él, con fuente oficial y fecha de consulta en cada dato. No diagnostica: te acerca a las personas de servicios oficiales que sí pueden ayudarte.</p>
+
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="#como-funciona">Explorar el prototipo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="#confianza">Cómo verificamos los datos</a>
+          </div>
+
+          <ul class="hero__trust">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Fuente y fecha en cada dato</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Sin registro ni datos personales</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>No diagnostica: te conecta con personas</li>
+          </ul>
+        </div>
+
+        <!-- Ventana animada del prototipo (decorativa; descrita en texto para lectores de pantalla) -->
+        <figure class="demo-wrap">
+          <figcaption class="sr-only">Vista animada del prototipo: una persona elige "Hablar con alguien" y "WhatsApp", y el flujo guiado muestra servicios que pueden orientarla, cada uno con su fuente oficial y fecha de consulta.</figcaption>
+          <div class="demo" data-demo aria-hidden="true">
+            <div class="demo__chrome">
+              <div class="demo__dots"><i></i><i></i><i></i></div>
+              <div class="demo__url">cerca · flujo guiado</div>
+              <span class="chip chip--amber">Datos ficticios</span>
+            </div>
+            <div class="demo__body">
+              <div class="demo__flow">
+                <p class="demo__label"><b>1</b> Tipo de orientación</p>
+                <p class="demo__q">¿Qué tipo de orientación buscas?</p>
+                <ul class="demo__options">
+                  <li class="opt" data-pick="1">Hablar con alguien</li>
+                  <li class="opt">Orientación en mi colegio</li>
+                  <li class="opt">Apoyar a otra persona</li>
+                  <li class="opt">Actividades de bienestar</li>
+                </ul>
+                <div class="demo__step2">
+                  <p class="demo__label"><b>2</b> Canal</p>
+                  <p class="demo__q">¿Cómo prefieres el contacto?</p>
+                  <ul class="demo__options">
+                    <li class="opt">Llamada</li>
+                    <li class="opt" data-pick="2">WhatsApp</li>
+                    <li class="opt">En persona</li>
+                  </ul>
+                </div>
+                <p class="demo__privacy"><svg aria-hidden="true"><use href="#i-lock"/></svg>Sin registro. Preguntamos por el tipo de consulta, nunca por síntomas.</p>
+              </div>
+
+              <div class="demo__results">
+                <div class="demo__head">
+                  <p class="demo__head-title">Estos servicios pueden orientarte</p>
+                  <span class="chip">3 resultados</span>
+                </div>
+                <div class="demo__skeleton"><i></i><i></i><i></i></div>
+                <ul class="result-list">
+                  <li class="result result--top">
+                    <div class="result__row">
+                      <div>
+                        <p class="result__name">Línea de escucha demo</p>
+                        <p class="result__meta">WhatsApp y llamada gratuita · 24 horas</p>
+                      </div>
+                      <span class="chip chip--lime"><svg aria-hidden="true"><use href="#i-check"/></svg>Verificado</span>
+                    </div>
+                    <div class="result__foot"><span class="result__src">Fuente: entidad oficial (ejemplo) · consultado 19 oct 2026</span></div>
+                  </li>
+                  <li class="result">
+                    <div class="result__row">
+                      <div>
+                        <p class="result__name">Centro de orientación juvenil (ficticio)</p>
+                        <p class="result__meta">WhatsApp · lun a vie, 8:00 a. m. a 5:00 p. m.</p>
+                      </div>
+                      <span class="chip chip--lime"><svg aria-hidden="true"><use href="#i-check"/></svg>Verificado</span>
+                    </div>
+                    <div class="result__foot"><span class="result__src">Fuente: entidad oficial (ejemplo) · consultado 19 oct 2026</span></div>
+                  </li>
+                  <li class="result">
+                    <div class="result__row">
+                      <div>
+                        <p class="result__name">Orientación escolar · Colegio Ejemplo 01</p>
+                        <p class="result__meta">Presencial · horario escolar</p>
+                      </div>
+                      <span class="chip chip--amber"><svg aria-hidden="true"><use href="#i-clock"/></svg>Revisión próxima</span>
+                    </div>
+                    <div class="result__foot"><span class="result__src">Fuente: entidad oficial (ejemplo) · consultado 2 oct 2026</span></div>
+                  </li>
+                </ul>
+                <p class="demo__note">Cerca no da atención: te conecta con personas de servicios institucionales.</p>
+              </div>
+              <span class="demo__cursor"><svg><use href="#i-cursor"/></svg></span>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================================================================ PRINCIPIOS -->
+    <section class="section--tight" aria-label="Principios">
+      <div class="marquee">
+        <div class="marquee__track">
+          <ul class="marquee__group" role="list">
+            <li class="marquee__item">Fuente y fecha en cada dato</li>
+            <li class="marquee__item">Cero diagnósticos</li>
+            <li class="marquee__item">Personas, no bots</li>
+            <li class="marquee__item">Sin estigma</li>
+            <li class="marquee__item">Sin pedirte datos</li>
+            <li class="marquee__item">Límites a la vista</li>
+            <li class="marquee__item">Lenguaje claro</li>
+            <li class="marquee__item">Rutas oficiales</li>
+            <li class="marquee__item">Hecho para tu celular</li>
+            <li class="marquee__item">Pensado desde el Llano</li>
+          </ul>
+          <ul class="marquee__group" role="list" aria-hidden="true">
+            <li class="marquee__item">Fuente y fecha en cada dato</li>
+            <li class="marquee__item">Cero diagnósticos</li>
+            <li class="marquee__item">Personas, no bots</li>
+            <li class="marquee__item">Sin estigma</li>
+            <li class="marquee__item">Sin pedirte datos</li>
+            <li class="marquee__item">Límites a la vista</li>
+            <li class="marquee__item">Lenguaje claro</li>
+            <li class="marquee__item">Rutas oficiales</li>
+            <li class="marquee__item">Hecho para tu celular</li>
+            <li class="marquee__item">Pensado desde el Llano</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <div class="sources-row">
+          <span>Información de fuentes oficiales públicas:</span>
+          <ul>
+            <li>Ministerio de Salud</li>
+            <li>Instituto Nacional de Salud</li>
+            <li>Alcaldía de Villavicencio</li>
+            <li>Función Pública</li>
+          </ul>
+          <span>Su mención no implica aval ni alianza.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ EL RETO -->
+    <section class="section" id="reto" aria-labelledby="reto-title">
+      <div class="container">
+        <p class="eyebrow" aria-hidden="true" data-reveal><span class="eyebrow__caret">&gt;</span> <span data-scramble>el_reto</span></p>
+        <h2 class="statement" id="reto-title" data-statement style="margin-top:24px">La ayuda existe. <span data-accent>Llegar a ella es lo difícil:</span> la información está regada, los números cambian y no siempre es claro qué servicio orienta cada consulta.</h2>
+
+        <div class="stats" data-stagger>
+          <figure class="card stat" data-reveal>
+            <p><span class="stat__num">28.290</span></p>
+            <figcaption class="stat__label">intentos de suicidio notificados en Colombia hasta el 27 de septiembre de 2025 (datos preliminares).</figcaption>
+            <p class="stat__src"><a class="chip" href="https://www.ins.gov.co/Noticias/Paginas/Problemas-familiares-el-factor-que-m%C3%A1s-afecta-la-salud-mental-de-los-colombianos.aspx" target="_blank" rel="noopener">INS · consultado 20 oct 2026 <svg aria-hidden="true"><use href="#i-external"/></svg><span class="sr-only">(se abre en una pestaña nueva)</span></a></p>
+          </figure>
+          <figure class="card stat" data-reveal>
+            <p><span class="stat__num">56,6 %</span></p>
+            <figcaption class="stat__label">de esos casos notificados corresponde a personas de 15 a 29 años.</figcaption>
+            <p class="stat__src"><a class="chip" href="https://www.ins.gov.co/Noticias/Paginas/Problemas-familiares-el-factor-que-m%C3%A1s-afecta-la-salud-mental-de-los-colombianos.aspx" target="_blank" rel="noopener">INS · consultado 20 oct 2026 <svg aria-hidden="true"><use href="#i-external"/></svg><span class="sr-only">(se abre en una pestaña nueva)</span></a></p>
+          </figure>
+          <figure class="card stat" data-reveal>
+            <p><span class="stat__num">441</span></p>
+            <figcaption class="stat__label">personas atendidas por la línea Yo Te Escucho en Villavicencio entre el 2 de marzo y el 3 de junio de 2026.</figcaption>
+            <p class="stat__src"><a class="chip" href="https://villavicencio.gov.co/linea-emocional-yo-te-escucho-atendio-441-casos-en-salud-mental-durante-el-ultimo-trimestre/" target="_blank" rel="noopener">Alcaldía de Villavicencio · consultado 20 oct 2026 <svg aria-hidden="true"><use href="#i-external"/></svg><span class="sr-only">(se abre en una pestaña nueva)</span></a></p>
+          </figure>
+        </div>
+        <p class="stats-note" data-reveal>Las cifras del INS son casos notificados al sistema de vigilancia (Sivigila) y pueden no reflejar el total. La ayuda existe y se usa: pedir ayuda funciona.</p>
+
+        <div class="card help-inline" data-reveal>
+          <p class="help-inline__text"><span class="pulse" aria-hidden="true"></span>Si necesitas hablar con alguien ahora, hay personas listas para escucharte.</p>
+          <div class="help-inline__actions">
+            <a class="btn btn--primary btn--sm" href="tel:106"><svg aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 106</a>
+            <a class="btn btn--ghost btn--sm" href="tel:018000931089"><svg aria-hidden="true"><use href="#i-phone"/></svg>Yo Te Escucho · 01 8000 931 089</a>
+          </div>
+          <p class="source-note help-inline__src">Fuente: Directorio de salud mental y prevención del suicidio, MinSalud · consultado el 19 oct 2026.</p>
+        </div>
+
+        <h3 class="sub-head" data-reveal>Lo que hoy se interpone</h3>
+        <div class="barriers" data-stagger>
+          <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-help"/></svg></span><h4 class="h-card">No sé a quién acudir</h4><p>Hay líneas, EPS, colegios y secretarías, pero no siempre es claro cuál puede orientar lo que buscas.</p></article>
+          <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--violet"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><h4 class="h-card">Información regada y sin fecha</h4><p>Números que ya no contestan, enlaces caídos y publicaciones sin fecha que no sabes si siguen vigentes.</p></article>
+          <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--cyan"><svg aria-hidden="true"><use href="#i-lock"/></svg></span><h4 class="h-card">La pena y el qué dirán</h4><p>Preguntar por salud mental todavía da pena, y muchos prefieren no buscar antes que sentirse señalados.</p></article>
+          <article class="card barrier spot" data-reveal><span class="icon-tile icon-tile--lime"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h4 class="h-card">Todo suena a trámite</h4><p>Páginas técnicas, palabras difíciles y formularios largos que desaniman antes de empezar.</p></article>
+        </div>
+
+        <p class="closing-line" data-reveal>Los servicios existen. Lo que falta es <span class="grad-text">acortar la distancia</span> entre tú y la ayuda correcta. Para eso diseñamos Cerca.</p>
+      </div>
+    </section>
+
+    <div class="container"><div class="divider-glow"></div></div>
+
+    <!-- ================================================================ CÓMO FUNCIONA -->
+    <section class="section" id="como-funciona" aria-labelledby="how-title" data-steps>
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>como_funciona</span></p>
+          <h2 class="h-section" id="how-title" data-reveal>De la duda a una persona real. En cuatro pasos.</h2>
+          <p class="lead" data-reveal>Desde tu celular. Sin crear cuenta, sin preguntas sobre tu salud y sin que nadie te juzgue.</p>
+        </div>
+
+        <div class="steps">
+          <div class="steps__col">
+            <span class="steps__rail" aria-hidden="true"><i></i></span>
+            <ol class="steps__list" role="list">
+            <li class="step"><p class="step__num" aria-hidden="true">01 / 04</p><h3 class="step__title">Elige qué buscas</h3><p class="step__body">Toca la opción que más se parezca a lo que necesitas, para ti o para alguien más. No das tu nombre ni cuentas tu historia.</p><div class="step__media" aria-hidden="true"></div></li>
+            <li class="step"><p class="step__num" aria-hidden="true">02 / 04</p><h3 class="step__title">Cuentas qué buscas, no qué tienes</h3><p class="step__body">Respondes dos o tres preguntas cortas sobre el tipo de orientación y cómo prefieres contactar. Nada de síntomas, puntajes ni diagnósticos.</p><div class="step__media" aria-hidden="true"></div></li>
+            <li class="step"><p class="step__num" aria-hidden="true">03 / 04</p><h3 class="step__title">Mira quién puede orientarte</h3><p class="step__body">Ves los servicios que pueden orientar tu consulta, con canal, horario y cómo llegar. Cada ficha dice de dónde sale el dato y cuándo se verificó.</p><div class="step__media" aria-hidden="true"></div></li>
+            <li class="step"><p class="step__num" aria-hidden="true">04 / 04</p><h3 class="step__title">Da el paso con un toque</h3><p class="step__body">Llamas, escribes o ves cómo llegar desde la misma pantalla. Del otro lado te orienta una persona del servicio, no un bot. Si un dato falla, lo reportas.</p><div class="step__media" aria-hidden="true"></div></li>
+          </ol>
+          </div>
+
+          <div class="steps__media" aria-hidden="true">
+            <div class="phone-glow"></div>
+            <div class="phone">
+              <div class="phone__notch"></div>
+              <div class="phone__screen">
+                <!-- Pantalla 1 -->
+                <div class="screen">
+                  <div class="screen__top"><span>Cerca</span><span>Sin cuenta</span></div>
+                  <p class="screen__title">¿Qué estás buscando?</p>
+                  <p class="screen__sub">Para ti o para alguien más. No necesitas dar tu nombre.</p>
+                  <div class="screen__chips">
+                    <span class="screen__chip is-picked">Quiero hablar con alguien <svg><use href="#i-arrow"/></svg></span>
+                    <span class="screen__chip">Busco orientación para mí <svg><use href="#i-arrow"/></svg></span>
+                    <span class="screen__chip">Me preocupa alguien cercano <svg><use href="#i-arrow"/></svg></span>
+                    <span class="screen__chip">Solo quiero informarme <svg><use href="#i-arrow"/></svg></span>
+                  </div>
+                  <p class="screen__foot">Prototipo TRL 4 · datos ficticios<br>Cerca no es un servicio de salud.</p>
+                </div>
+                <!-- Pantalla 2 -->
+                <div class="screen">
+                  <div class="screen__top"><span>Paso 2 de 3</span><span>Escenario ficticio</span></div>
+                  <div class="screen__bar"><i style="width:66%"></i></div>
+                  <p class="screen__title">¿Cómo prefieres contactar?</p>
+                  <p class="screen__sub">Preguntamos por el tipo de orientación, nunca por síntomas.</p>
+                  <div class="screen__chips">
+                    <span class="screen__chip is-picked">Llamada <svg><use href="#i-phone"/></svg></span>
+                    <span class="screen__chip">WhatsApp <svg><use href="#i-chat"/></svg></span>
+                    <span class="screen__chip">Presencial <svg><use href="#i-pin"/></svg></span>
+                    <span class="screen__chip">Me da igual <svg><use href="#i-arrow"/></svg></span>
+                  </div>
+                  <span class="screen__btn screen__btn--alt">Prefiero hablar con una persona ahora</span>
+                  <p class="screen__foot">Prototipo TRL 4 · datos ficticios</p>
+                </div>
+                <!-- Pantalla 3 -->
+                <div class="screen">
+                  <div class="screen__top"><span>Paso 3 de 3</span><span>2 resultados</span></div>
+                  <div class="screen__bar"><i style="width:100%"></i></div>
+                  <p class="screen__title">Pueden orientarte</p>
+                  <p class="screen__sub">Con canal, horario, fuente y fecha.</p>
+                  <div class="screen__card screen__card--ok">
+                    <p class="screen__card-name">Servicio ficticio A</p>
+                    <p class="screen__card-meta">Llamada · lun a vie, 8:00 a. m. a 5:00 p. m.</p>
+                    <div class="screen__tags"><span class="chip chip--lime"><svg><use href="#i-check"/></svg>Verificado</span><span class="chip chip--amber">Dato de ejemplo</span></div>
+                    <p class="screen__src">Fuente: entidad oficial (ejemplo) · consultado 19 oct 2026</p>
+                  </div>
+                  <div class="screen__card screen__card--ok">
+                    <p class="screen__card-name">Punto de orientación ficticio B</p>
+                    <p class="screen__card-meta">Presencial · sáb, 9:00 a. m. a 12:00 m.</p>
+                    <div class="screen__tags"><span class="chip chip--lime"><svg><use href="#i-check"/></svg>Verificado</span><span class="chip chip--amber">Dato de ejemplo</span></div>
+                    <p class="screen__src">Fuente: entidad oficial (ejemplo) · consultado 19 oct 2026</p>
+                  </div>
+                </div>
+                <!-- Pantalla 4 -->
+                <div class="screen">
+                  <div class="screen__top"><span>Servicio ficticio A</span><span>Dato de ejemplo</span></div>
+                  <p class="screen__title">Da el paso con un toque</p>
+                  <p class="screen__sub">Del otro lado te orienta una persona del servicio, no un bot.</p>
+                  <div class="screen__map"><span class="pin pin--you" style="left:28%;top:62%"></span><span class="pin" style="left:68%;top:38%"></span></div>
+                  <span class="screen__btn"><svg><use href="#i-phone"/></svg>Llamar</span>
+                  <span class="screen__btn screen__btn--alt"><svg><use href="#i-chat"/></svg>Escribir</span>
+                  <span class="screen__btn screen__btn--alt"><svg><use href="#i-pin"/></svg>Cómo llegar</span>
+                  <p class="screen__foot"><svg style="display:inline;width:11px;height:11px;vertical-align:-1px"><use href="#i-flag"/></svg> ¿Este dato no funciona? Repórtalo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ PRODUCTO -->
+    <section class="section" id="producto" aria-labelledby="product-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>producto</span></p>
+          <h2 class="h-section" id="product-title" data-reveal>Cuatro funciones. Un solo propósito.</h2>
+          <p class="lead" data-reveal>Las cuatro funciones que permite el reto, integradas en un mismo prototipo. Todas usan información con fuente y fecha, y todas terminan en servicios atendidos por personas.</p>
+        </div>
+
+        <div class="tabs" data-tabs data-reveal>
+          <div class="tabs__list" role="tablist" aria-label="Módulos de Cerca">
+            <button class="tab" type="button" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" tabindex="0"><span class="tab__num" aria-hidden="true">01</span><span class="tab__label">Directorio</span><span class="tab__bar" aria-hidden="true"><i></i></span></button>
+            <button class="tab" type="button" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1"><span class="tab__num" aria-hidden="true">02</span><span class="tab__label">Ruta guiada</span><span class="tab__bar" aria-hidden="true"><i></i></span></button>
+            <button class="tab" type="button" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1"><span class="tab__num" aria-hidden="true">03</span><span class="tab__label">Bienestar</span><span class="tab__bar" aria-hidden="true"><i></i></span></button>
+            <button class="tab" type="button" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1"><span class="tab__num" aria-hidden="true">04</span><span class="tab__label">Info oficial</span><span class="tab__bar" aria-hidden="true"><i></i></span></button>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0">
+            <div class="tabpanel__copy">
+              <h3 class="tabpanel__title">Los servicios verificados, en un solo mapa.</h3>
+              <p class="tabpanel__body">Un directorio con mapa de los servicios y canales institucionales de Villavicencio. Filtras por canal, horario o tipo de orientación y ves cómo llegar. Solo se publica lo que tiene fuente oficial y fecha de consulta.</p>
+              <ul class="ticks"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Filtros por canal: llamada, WhatsApp o presencial</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Fuente oficial y fecha de consulta visibles en cada ficha</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Botones directos para llamar, escribir o ver cómo llegar</li></ul>
+            </div>
+            <div class="mock" aria-hidden="true">
+              <div class="mock__bar"><span>cerca · directorio</span><span class="chip chip--amber">Datos ficticios</span></div>
+              <div class="mock__body">
+                <div class="map">
+                  <svg class="map__base" viewBox="0 0 400 230" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="routeG" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff5c8a"/><stop offset="1" stop-color="#bdf54a"/></linearGradient>
+                    </defs>
+                    <path d="M0 40H400M0 90H400M0 140H400M0 190H400M60 0V230M130 0V230M200 0V230M270 0V230M340 0V230" stroke="rgba(255,255,255,.06)" vector-effect="non-scaling-stroke"/>
+                    <path d="M-10 205 L175 112 L410 58M92 -10 L150 240M250 -10 L300 240" stroke="rgba(255,255,255,.13)" stroke-width="3" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                    <path d="M-10 172 C70 142 120 207 200 177 S330 112 410 127" stroke="rgba(69,220,247,.26)" stroke-width="7" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                    <path class="map__route" d="M120 133 C150 128 185 108 208 92" stroke="url(#routeG)" stroke-width="2.5" stroke-dasharray="5 6" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                  </svg>
+                  <span class="pin pin--you" style="left:30%;top:58%"></span>
+                  <span class="pin" style="left:52%;top:40%;--d:.4s"></span>
+                  <span class="pin" style="left:72%;top:66%;--d:.8s"></span>
+                  <span class="pin" style="left:40%;top:20%;--d:1.2s;--c:var(--cyan)"></span>
+                  <span class="pin" style="left:84%;top:28%;--d:1.6s;--c:var(--cyan)"></span>
+                  <span class="map__legend">Mapa ilustrativo</span>
+                  <div class="map__card">
+                    <p class="dir-row__name">Centro de orientación juvenil</p>
+                    <p class="dir-row__meta">Ficticio · a 1,2 km · presencial</p>
+                  </div>
+                </div>
+                <div class="filters"><span class="chip is-on">Llamada</span><span class="chip is-on">WhatsApp</span><span class="chip">Presencial</span><span class="chip">Fin de semana</span></div>
+                <div class="dir-row">
+                  <div><p class="dir-row__name">Centro de orientación juvenil (ficticio)</p><p class="dir-row__meta">Presencial · lun a vie, 8:00 a. m. a 5:00 p. m.</p></div>
+                  <span class="chip chip--lime"><svg><use href="#i-check"/></svg>Verificado</span>
+                </div>
+                <div class="dir-row">
+                  <div><p class="dir-row__name">Línea de escucha demo</p><p class="dir-row__meta">Llamada y WhatsApp · 24 horas</p></div>
+                  <span class="chip chip--lime"><svg><use href="#i-check"/></svg>Verificado</span>
+                </div>
+                <p class="result__src">Fuente: entidad oficial (ejemplo) · consultado 19 oct 2026</p>
+              </div>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" hidden>
+            <div class="tabpanel__copy">
+              <h3 class="tabpanel__title">Tres preguntas. Un servicio que puede orientarte.</h3>
+              <p class="tabpanel__body">Un flujo de opciones cerradas te indica qué servicio puede orientar tu consulta. No evalúa tu riesgo ni interpreta lo que sientes: te muestra la ruta institucional que corresponde y por qué.</p>
+              <ul class="ticks"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Preguntas sobre el tipo de orientación, nunca sobre síntomas</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Reglas claras y revisables: ves por qué aparece cada servicio</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Botón para hablar con una persona en cada paso</li></ul>
+            </div>
+            <div class="mock" aria-hidden="true">
+              <div class="mock__bar"><span>cerca · ruta guiada</span><span class="chip chip--amber">Escenario ficticio 03</span></div>
+              <div class="mock__body">
+                <div class="screen__bar"><i style="width:100%"></i></div>
+                <div class="flow" data-flow>
+                  <svg class="flow__lines">
+                    <defs><linearGradient id="flowGrad" gradientUnits="userSpaceOnUse" x1="0%" y1="0" x2="100%" y2="0"><stop stop-color="#ff5c8a"/><stop offset="1" stop-color="#bdf54a"/></linearGradient></defs>
+                    <path data-from="a1" data-to="b1"/>
+                    <path data-from="a1" data-to="b3"/>
+                    <path data-from="a2" data-to="b2"/>
+                    <path data-from="b1" data-to="c2"/>
+                    <path class="is-path" data-from="a1" data-to="b2"/>
+                    <path class="is-path" data-from="b2" data-to="c1"/>
+                  </svg>
+                  <div class="flow__col">
+                    <span class="flow__head">¿Para quién?</span>
+                    <div class="flow__node is-path" data-node="a1">Para mí</div>
+                    <div class="flow__node" data-node="a2">Para alguien más</div>
+                  </div>
+                  <div class="flow__col">
+                    <span class="flow__head">¿Qué buscas?</span>
+                    <div class="flow__node" data-node="b1">Información</div>
+                    <div class="flow__node is-path" data-node="b2">Hablar con alguien</div>
+                    <div class="flow__node" data-node="b3">Actividades</div>
+                  </div>
+                  <div class="flow__col">
+                    <span class="flow__head">Pueden orientarte</span>
+                    <div class="flow__node is-end" data-node="c1"><small>Llamada · 24 h</small>Línea de escucha demo</div>
+                    <div class="flow__node" data-node="c2"><small>Presencial</small>Centro de orientación ficticio</div>
+                  </div>
+                </div>
+                <div class="flow__why">
+                  <p><b>Por qué ves esto:</b> elegiste hablar con alguien, para ti, por llamada.</p>
+                  <span class="fake-btn"><svg><use href="#i-phone"/></svg>Hablar con una persona ahora</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0" hidden>
+            <div class="tabpanel__copy">
+              <h3 class="tabpanel__title">Lo que pasa en tu colegio y tu barrio, en un solo calendario.</h3>
+              <p class="tabpanel__body">Colegios, orientadores y organizaciones comunitarias publican talleres, charlas y jornadas de bienestar. Cada publicación se revisa antes de mostrarse.</p>
+              <ul class="ticks"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Formulario sencillo para quien organiza, con revisión previa</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Calendario por colegio, barrio o tipo de actividad</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Sin listas de asistentes ni datos de estudiantes</li></ul>
+            </div>
+            <div class="mock" aria-hidden="true">
+              <div class="mock__bar"><span>cerca · bienestar</span><span class="chip chip--amber">Actividades ficticias</span></div>
+              <div class="mock__body">
+                <div class="events">
+                  <div class="event">
+                    <div class="event__date"><b>JUE</b><span>2:00 p. m.</span></div>
+                    <div>
+                      <p class="event__name">Taller de manejo del estrés</p>
+                      <p class="event__meta">Colegio Ejemplo 01 · Orientación escolar</p>
+                      <div class="screen__tags"><span class="chip">Gratis</span><span class="chip chip--lime"><svg><use href="#i-check"/></svg>Revisado</span></div>
+                    </div>
+                  </div>
+                  <div class="event">
+                    <div class="event__date"><b>SÁB</b><span>3:00 p. m.</span></div>
+                    <div>
+                      <p class="event__name">Tarde de deporte y bienestar</p>
+                      <p class="event__meta">JAC Barrio Demo · Cancha comunal</p>
+                      <div class="screen__tags"><span class="chip">Abierto</span><span class="chip chip--lime"><svg><use href="#i-check"/></svg>Revisado</span></div>
+                    </div>
+                  </div>
+                  <div class="event">
+                    <div class="event__date"><b>MIÉ</b><span>4:00 p. m.</span></div>
+                    <div>
+                      <p class="event__name">Cine foro: hablemos de emociones</p>
+                      <p class="event__meta">Biblioteca de ejemplo</p>
+                      <div class="screen__tags"><span class="chip">Gratis</span><span class="chip chip--amber">En revisión</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="publish">
+                  <span>¿Organizas una actividad? Se publica después de una revisión.</span>
+                  <span class="fake-btn"><svg><use href="#i-calendar"/></svg>Publicar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" tabindex="0" hidden>
+            <div class="tabpanel__copy">
+              <h3 class="tabpanel__title">Información oficial. Con fuente y fecha a la vista.</h3>
+              <p class="tabpanel__body">Explicaciones cortas sobre qué es una ruta de atención, cómo funciona y qué esperar al contactar un servicio. Cada página enlaza su fuente oficial y dice cuándo se consultó.</p>
+              <ul class="ticks"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Enlace directo al documento original</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Fecha de consulta y próxima revisión visibles</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Lectura accesible: texto ampliable, alto contraste y lector de pantalla</li></ul>
+            </div>
+            <div class="mock" aria-hidden="true">
+              <div class="mock__bar"><span>cerca · información oficial</span><span class="chip chip--amber">Contenido de ejemplo</span></div>
+              <div class="mock__body">
+                <p class="reader__crumbs">Información oficial › Rutas de atención</p>
+                <p class="reader__title">¿Qué es una ruta de atención?</p>
+                <p class="reader__text">Es el camino que sigues para llegar al servicio que puede orientarte: a quién contactar, por qué canal y qué esperar.</p>
+                <div class="reader__lines"><i style="width:96%"></i><i style="width:88%"></i><i style="width:72%"></i></div>
+                <div class="reader__src">
+                  <div class="reader__src-row"><span>Fuente</span><span>Entidad oficial (ejemplo)</span></div>
+                  <div class="reader__src-row"><span>Consultado</span><span>19 oct 2026</span></div>
+                  <div class="reader__src-row"><span>Próxima revisión</span><span>19 nov 2026</span></div>
+                  <div class="reader__src-row"><span>Vigencia</span><span class="chip chip--lime"><svg><use href="#i-check"/></svg>Verificado</span></div>
+                </div>
+                <div class="reader__actions">
+                  <span class="fake-btn"><svg><use href="#i-external"/></svg>Ver documento original</span>
+                  <span class="fake-btn"><svg><use href="#i-flag"/></svg>Reportar dato desactualizado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="source-note tabs__note">Pantallas de prototipo: nombres, servicios, fechas y actividades de ejemplo son ficticios (datos sintéticos).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ CONFIANZA -->
+    <section class="section" id="confianza" aria-labelledby="trust-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>salvaguardas</span></p>
+          <h2 class="h-section" id="trust-title" data-reveal>Lo que Cerca hace. Y lo que nunca hará.</h2>
+          <p class="lead" data-reveal>Cerca no es un servicio de salud ni de emergencias. No diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te ayuda a encontrar servicios institucionales que pueden orientarte. Estos límites no van en letra pequeña: están a la vista en cada pantalla.</p>
+        </div>
+
+        <div class="trust-grid" data-stagger>
+          <div class="card trust-col trust-col--yes" data-reveal>
+            <div class="trust-col__head">
+              <span class="icon-tile icon-tile--lime"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+              <h3 class="h-card">Lo que Cerca sí hace</h3>
+            </div>
+            <ul class="ticks">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Muestra servicios y canales institucionales con su fuente oficial y fecha de consulta.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Indica qué servicio puede orientar tu consulta, con opciones claras y cerradas.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Mantiene las líneas de apoyo oficiales a un toque, en todas las pantallas.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Explica la información oficial en lenguaje claro y accesible.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Permite reportar con un toque un teléfono o enlace que no funciona.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Funciona sin cuenta y sin pedirte datos personales ni de salud.</li>
+            </ul>
+          </div>
+          <div class="card trust-col trust-col--no" data-reveal>
+            <div class="trust-col__head">
+              <span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-ban"/></svg></span>
+              <h3 class="h-card">Lo que nunca hará</h3>
+            </div>
+            <ul class="ticks ticks--no">
+              <li><svg aria-hidden="true"><use href="#i-ban"/></svg>Diagnosticar, prescribir ni recomendar tratamientos.</li>
+              <li><svg aria-hidden="true"><use href="#i-ban"/></svg>Predecir ni calificar riesgo clínico de ningún tipo.</li>
+              <li><svg aria-hidden="true"><use href="#i-ban"/></svg>Actuar como profesional de salud, ni con un chatbot ni de ninguna otra forma.</li>
+              <li><svg aria-hidden="true"><use href="#i-ban"/></svg>Usar datos reales de salud mental ni hacer pruebas con público.</li>
+              <li><svg aria-hidden="true"><use href="#i-ban"/></svg>Diseñar protocolos de crisis ni instrumentos clínicos.</li>
+              <li><svg aria-hidden="true"><use href="#i-ban"/></svg>Presentarse o publicarse como un servicio de salud.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="sub-head sub-head--center" data-reveal>Cómo se mantiene al día la información</h3>
+        <div class="cycle-wrap" data-inview>
+          <span class="cycle__line" aria-hidden="true"><i></i><span class="cycle__runner"></span></span>
+          <ol class="cycle" role="list" data-stagger>
+          <li class="cycle__step" data-reveal><span class="cycle__badge" aria-hidden="true">01</span><h4 class="h-card">Fuente oficial</h4><p>Cada teléfono, ruta o servicio sale de una fuente institucional identificada: entidad, documento y enlace. Sin fuente oficial, no se publica.</p></li>
+          <li class="cycle__step" data-reveal><span class="cycle__badge" aria-hidden="true">02</span><h4 class="h-card">Fecha de consulta</h4><p>Cada dato muestra el día en que se verificó. Sin fecha, no aparece como vigente.</p></li>
+          <li class="cycle__step" data-reveal><span class="cycle__badge" aria-hidden="true">03</span><h4 class="h-card">Revisión periódica</h4><p>Un rol responsable revisa cada dato en un ciclo fijo (propuesta: cada 30 días) y deja registro de cada cambio.</p></li>
+          <li class="cycle__step" data-reveal><span class="cycle__badge" aria-hidden="true">04</span><h4 class="h-card">Reporte de fallas</h4><p>Cualquier persona puede reportar un teléfono o enlace que no funciona, sin dar datos personales. El dato pasa a “En revisión” y deja de mostrarse como vigente hasta que se confirme.</p></li>
+        </ol>
+        </div>
+
+        <div class="card fresh" data-reveal>
+          <div>
+            <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> indicador_de_vigencia</p>
+            <h3 class="tabpanel__title" style="margin-top:16px">Un dato vencido no se muestra como vigente.</h3>
+            <p class="tabpanel__body">Cada dato lleva un indicador de vigencia con texto e ícono, no solo con color. Si venció o tiene un reporte abierto, deja de mostrarse como vigente y aparecen otras opciones verificadas.</p>
+          </div>
+          <ul class="fresh__list">
+            <li class="fresh__item" style="--c: var(--lime)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-check"/></svg>Verificado</b><span>Revisado dentro de su ciclo de verificación.</span></div></li>
+            <li class="fresh__item" style="--c: var(--amber)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-clock"/></svg>Revisión próxima</b><span>Está por vencer: se muestra con un aviso visible.</span></div></li>
+            <li class="fresh__item" style="--c: #8a8aa0"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-flag"/></svg>En revisión</b><span>Venció o tiene un reporte abierto: deja de mostrarse como vigente.</span></div></li>
+            <li class="source-note">Propuesta: ciclo de 30 días. El plan de operación define los plazos con cada fuente.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ PARA QUIÉN -->
+    <section class="section" id="para-quien" aria-labelledby="aud-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>para_quien</span></p>
+          <h2 class="h-section" id="aud-title" data-reveal>Para quienes buscan ayuda. Y para quienes la acercan.</h2>
+        </div>
+        <div class="audiences" data-stagger>
+          <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-user"/></svg></span><h3 class="h-card">Jóvenes de Villavicencio</h3><p>Encuentra a dónde acudir desde tu celular, sin crear cuenta, sin dar tu nombre y sin que nadie te juzgue. Para ti o para alguien que te preocupa.</p></article>
+          <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--violet"><svg aria-hidden="true"><use href="#i-school"/></svg></span><h3 class="h-card">Colegios y orientadores</h3><p>Una referencia confiable para compartir con tus estudiantes y un espacio para difundir las actividades de bienestar de tu institución.</p></article>
+          <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--cyan"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><h3 class="h-card">Familias y comunidad</h3><p>Si alguien cercano pasa por un momento difícil, te muestra qué servicios pueden orientarte y cómo contactarlos.</p></article>
+          <article class="card audience spot" data-reveal><span class="icon-tile icon-tile--lime"><svg aria-hidden="true"><use href="#i-building"/></svg></span><h3 class="h-card">Quienes mantienen la información</h3><p>Pensado para que un rol responsable verifique teléfonos, horarios y rutas, con fuente, fecha y registro de cada cambio.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ ESTADO -->
+    <section class="section" id="estado" aria-labelledby="status-title">
+      <div class="container status">
+        <div>
+          <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>estado_del_proyecto</span></p>
+          <h2 class="h-section" id="status-title" style="margin-top:20px" data-reveal>TRL 4. Ni más, ni menos.</h2>
+          <p class="lead" style="margin-top:20px" data-reveal>Cerca es un prototipo académico creado para la Hackathon Villavicencio 2026 · Reto 01. Su meta en este reto es TRL 4: funciones críticas integradas y funcionando en un entorno controlado, probadas con datos sintéticos y escenarios ficticios. No está disponible para uso público y no se ha probado con jóvenes ni con público.</p>
+          <h3 class="sub-head sub-head--sm" data-reveal>Próximos pasos</h3>
+          <ol class="next-steps" role="list" data-reveal>
+            <li>Publicar la evidencia de pruebas: casos definidos, resultados obtenidos y limitaciones conocidas.</li>
+            <li>Convertir el plan de operación en acuerdos concretos: quién verifica, cada cuánto y cómo se atienden los reportes.</li>
+            <li>Auditar la accesibilidad frente a WCAG 2.2 AA y la Resolución MinTIC 1519 de 2020.</li>
+            <li>Revisar contenidos y lenguaje con profesionales. Con jóvenes, solo en espacios autorizados, con revisión ética y consentimiento.</li>
+            <li>Buscar mentoría para avanzar hacia TRL 5 sin tocar ninguna salvaguarda.</li>
+          </ol>
+        </div>
+        <div>
+          <ol class="trl" role="list" data-stagger>
+            <li class="trl__item trl__item--done" data-reveal><b>TRL 2</b><div><h3>Concepto formulado</h3><p>Problema definido con cifras oficiales y alcance permitido: información y rutas, nunca atención clínica.</p></div></li>
+            <li class="trl__item trl__item--done" data-reveal><b>TRL 3</b><div><h3>Prueba de concepto</h3><p>Directorio, ruta guiada y registro de fuente y fecha, probados por separado con datos de ejemplo.</p></div></li>
+            <li class="trl__item trl__item--now" data-reveal aria-current="step"><b>TRL 4</b><div><h3>Validación en entorno controlado · meta de este reto</h3><p>Las cuatro funciones integradas, con casos de prueba definidos, resultados documentados y limitaciones identificadas.</p></div></li>
+            <li class="trl__item trl__item--next" data-reveal><b>TRL 5</b><div><h3>Entorno pertinente · fuera de este reto</h3><p>Exige acuerdos institucionales, responsables de verificación y revisión ética. No hace parte de esta etapa.</p></div></li>
+          </ol>
+          <div class="card tests" data-reveal>
+            <h3 class="h-card">Cómo lo probamos</h3>
+            <p class="muted tests__intro">Casos de prueba definidos, con datos sintéticos y escenarios ficticios. Sin pruebas con público.</p>
+            <ul class="ticks">
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Escenario ficticio A: “Persona de prueba A” busca hablar con alguien por WhatsApp. Esperado: solo aparecen servicios con fuente, fecha y contacto humano.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Escenario ficticio B: un dato supera su ciclo de revisión. Esperado: pasa a “En revisión” y deja de mostrarse como vigente.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Escenario ficticio C: alguien reporta un teléfono que no contesta. Esperado: el dato se marca sin pedir datos personales.</li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg>En todos los casos: ninguna pantalla pregunta por síntomas ni muestra puntajes, y las líneas de apoyo siguen a un toque.</li>
+            </ul>
+            <p class="source-note tests__note">Los resultados obtenidos y las limitaciones identificadas se documentan en el reporte de pruebas del equipo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ <details><summary>¿Cerca es un servicio de salud?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Cerca es una herramienta de información y navegación. No diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te muestra qué servicios institucionales pueden orientarte y cómo contactarlos.</p></div></details>
+          <details><summary>¿Puedo usar Cerca hoy?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Todavía no. Cerca es un prototipo TRL 4 que funciona solo en un entorno controlado, con datos ficticios. No está disponible para uso público. Si necesitas apoyo ahora, usa las líneas oficiales del botón “Líneas de apoyo”.</p></div></details>
+          <details><summary>¿Qué datos guardan sobre mí?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Ninguno. Cerca está diseñado para no pedir datos personales ni de salud: no hay cuenta, nombre ni correo. Si reportas un dato que no funciona, solo se registra qué dato falló y cuándo. Esta página no pide ni guarda datos personales ni de salud, y no usa cookies de seguimiento.</p></div></details>
+          <details><summary>¿Quién verifica la información?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cada dato sale de una fuente oficial y muestra la fecha en que se consultó. El plan de operación propone un rol responsable que revisa cada dato en un ciclo fijo y registra cada cambio. Si un dato no tiene fuente ni fecha, no se muestra.</p></div></details>
+          <details><summary>¿Qué pasa si un teléfono o enlace no funciona?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Lo reportas con el botón de la misma ficha, sin incluir datos personales. El dato pasa a “En revisión”, deja de mostrarse como vigente y el responsable lo confirma o lo corrige contra la fuente oficial. Mientras tanto, ves otras opciones verificadas.</p></div></details>
+          <details><summary>¿Usa inteligencia artificial?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>La ruta guiada funciona con reglas claras y opciones cerradas, no con un chatbot. Cerca no conversa contigo como lo haría un profesional. Si en el futuro se usa IA, será solo con información validada, con límites visibles y siempre con un camino directo a personas de servicios oficiales.</p></div></details>
+          <details><summary>¿Es gratis?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca está pensado para ser gratuito y sin publicidad. Hoy es un prototipo de hackatón. Las condiciones de cada servicio las define la entidad que lo presta, y las mostramos cuando la fuente oficial las publica.</p></div></details>
+          <details><summary>¿Puedo buscar orientación para un amigo?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Sí. La ruta guiada tiene una opción para cuando la consulta es por otra persona. Te muestra qué servicios pueden orientarte a ti y a quien te preocupa.</p></div></details>
+          <details><summary>¿Y si estoy pasando por un momento muy difícil ahora?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca no atiende emergencias, pero hay personas que sí pueden escucharte. Puedes comunicarte con la Línea 106 o con Yo Te Escucho Villavicencio desde el botón “Líneas de apoyo”. Hablar con alguien es un buen primer paso. Si tu vida o la de otra persona está en peligro inmediato, llama al 123 o acude al servicio de urgencias más cercano.</p></div></details>
+          <details><summary>¿Cerca está avalado por alguna entidad?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Es un proyecto independiente creado en la Hackathon Villavicencio 2026. Las instituciones que se mencionan aparecen solo como fuentes de información. Su mención no implica aval, alianza ni representación oficial.</p></div></details> -->
+    <section class="section" id="preguntas" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>preguntas_frecuentes</span></p>
+          <h2 class="h-section" id="faq-title" data-reveal>Preguntas frecuentes</h2>
+        </div>
+        <div class="faq" data-reveal>
+          <details><summary>¿Cerca es un servicio de salud?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Cerca es una herramienta de información y navegación. No diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te muestra qué servicios institucionales pueden orientarte y cómo contactarlos.</p></div></details>
+          <details><summary>¿Puedo usar Cerca hoy?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Todavía no. Cerca es un prototipo TRL 4 que funciona solo en un entorno controlado, con datos ficticios. No está disponible para uso público. Si necesitas apoyo ahora, usa las líneas oficiales del botón “Líneas de apoyo”.</p></div></details>
+          <details><summary>¿Qué datos guardan sobre mí?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Ninguno. Cerca está diseñado para no pedir datos personales ni de salud: no hay cuenta, nombre ni correo. Si reportas un dato que no funciona, solo se registra qué dato falló y cuándo. Esta página no pide ni guarda datos personales ni de salud, y no usa cookies de seguimiento.</p></div></details>
+          <details><summary>¿Quién verifica la información?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cada dato sale de una fuente oficial y muestra la fecha en que se consultó. El plan de operación propone un rol responsable que revisa cada dato en un ciclo fijo y registra cada cambio. Si un dato no tiene fuente ni fecha, no se muestra.</p></div></details>
+          <details><summary>¿Qué pasa si un teléfono o enlace no funciona?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Lo reportas con el botón de la misma ficha, sin incluir datos personales. El dato pasa a “En revisión”, deja de mostrarse como vigente y el responsable lo confirma o lo corrige contra la fuente oficial. Mientras tanto, ves otras opciones verificadas.</p></div></details>
+          <details><summary>¿Usa inteligencia artificial?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>La ruta guiada funciona con reglas claras y opciones cerradas, no con un chatbot. Cerca no conversa contigo como lo haría un profesional. Si en el futuro se usa IA, será solo con información validada, con límites visibles y siempre con un camino directo a personas de servicios oficiales.</p></div></details>
+          <details><summary>¿Es gratis?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca está pensado para ser gratuito y sin publicidad. Hoy es un prototipo de hackatón. Las condiciones de cada servicio las define la entidad que lo presta, y las mostramos cuando la fuente oficial las publica.</p></div></details>
+          <details><summary>¿Puedo buscar orientación para un amigo?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Sí. La ruta guiada tiene una opción para cuando la consulta es por otra persona. Te muestra qué servicios pueden orientarte a ti y a quien te preocupa.</p></div></details>
+          <details><summary>¿Y si estoy pasando por un momento muy difícil ahora?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca no atiende emergencias, pero hay personas que sí pueden escucharte. Puedes comunicarte con la Línea 106 o con Yo Te Escucho Villavicencio desde el botón “Líneas de apoyo”. Hablar con alguien es un buen primer paso. Si tu vida o la de otra persona está en peligro inmediato, llama al 123 o acude al servicio de urgencias más cercano.</p></div></details>
+          <details><summary>¿Cerca está avalado por alguna entidad?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Es un proyecto independiente creado en la Hackathon Villavicencio 2026. Las instituciones que se mencionan aparecen solo como fuentes de información. Su mención no implica aval, alianza ni representación oficial.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ CTA + AYUDA -->
+    <section class="section section--cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta" data-reveal>
+          <div class="cta__bg" aria-hidden="true"></div>
+          <p class="eyebrow" aria-hidden="true" style="margin-bottom:20px"><span class="eyebrow__caret">&gt;</span> acortemos_la_distancia</p>
+          <h2 class="h-section" id="cta-title">¿Eres colegio, orientador o institución? Mira el prototipo.</h2>
+          <p class="lead">Te mostramos los escenarios de prueba ficticios, los resultados obtenidos y las limitaciones, sin adornos. También cómo se mantendría cada dato verificado, con responsables claros.</p>
+          <div class="cta__actions">
+            <a class="btn btn--primary" href="#producto">Ver el producto <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="#confianza">Ver cómo verificamos</a>
+          </div>
+        </div>
+
+        <div class="card help-block" id="ayuda" tabindex="-1" aria-labelledby="ayuda-title">
+          <div class="help-block__head">
+            <h2 class="help-block__title" id="ayuda-title"><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>Si lo necesitas ahora, estas líneas oficiales te escuchan.</h2>
+            <span class="chip">Te atienden personas, no Cerca</span>
+          </div>
+          <ul class="help-cards" role="list">
+            <li class="help-card">
+              <span class="help-card__num">106</span>
+              <span class="help-card__label">Línea Nacional de Teleorientación en Salud Mental. Llamada gratuita y confidencial, 24 horas, todos los días.</span>
+              <span class="source-note">Fuente: <a href="https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/VS/PP/ET/directorio-salud-mental-prevencion-suicidio-minsalud.pdf" target="_blank" rel="noopener">Directorio de salud mental y prevención del suicidio, MinSalud<span class="sr-only"> (se abre en una pestaña nueva)</span></a> · consultado el 19 oct 2026</span>
+              <div class="help-line__actions"><a href="tel:106" aria-label="Llamar a la Línea 106"><svg aria-hidden="true" width="14" height="14"><use href="#i-phone"/></svg>Llamar</a></div>
+            </li>
+            <li class="help-card">
+              <span class="help-card__num">01 8000 931 089</span>
+              <span class="help-card__label">Yo Te Escucho Villavicencio. Línea gratuita y WhatsApp 316 390 7010, 24 horas.</span>
+              <span class="source-note">Fuente: Directorio MinSalud (consultado el 19 oct 2026) y <a href="https://villavicencio.gov.co/linea-emocional-yo-te-escucho-atendio-441-casos-en-salud-mental-durante-el-ultimo-trimestre/" target="_blank" rel="noopener">Alcaldía de Villavicencio<span class="sr-only"> (se abre en una pestaña nueva)</span></a> (consultado el 20 oct 2026)</span>
+              <div class="help-line__actions">
+                <a href="tel:018000931089" aria-label="Llamar gratis a Yo Te Escucho"><svg aria-hidden="true" width="14" height="14"><use href="#i-phone"/></svg>Llamar</a>
+                <a class="is-alt" href="https://wa.me/573163907010" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a Yo Te Escucho, 316 390 7010 (se abre en una pestaña nueva)"><svg aria-hidden="true" width="14" height="14"><use href="#i-chat"/></svg>WhatsApp</a>
+              </div>
+            </li>
+            <li class="help-card">
+              <span class="help-card__num">123</span>
+              <span class="help-card__label">Línea única de emergencias. Si tu vida o la de otra persona está en peligro inmediato.</span>
+              <span class="source-note">Fuente: <a href="https://www1.funcionpublica.gov.co/preguntas-frecuentes/-/asset_publisher/sqxafjubsrEu/content/linea-unica-de-emergencias-nacional-123/28585938" target="_blank" rel="noopener">Función Pública, Línea única de emergencias Nacional 123<span class="sr-only"> (se abre en una pestaña nueva)</span></a> · consultado el 20 oct 2026</span>
+              <div class="help-line__actions"><a href="tel:123" aria-label="Llamar a la línea de emergencias 123"><svg aria-hidden="true" width="14" height="14"><use href="#i-phone"/></svg>Llamar</a></div>
+            </li>
+          </ul>
+          <p class="source-note">Los datos pueden cambiar: verifica siempre en la fuente oficial. Cerca no es un servicio de salud ni de emergencias.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a class="brand" href="#inicio" aria-label="Cerca, volver al inicio">
+            <svg class="brand__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+            <span>Cerca</span>
+          </a>
+          <p class="footer__tagline">La ayuda correcta, más cerca de ti. Prototipo para la Hackathon Villavicencio 2026 · Reto 01 · mente_sana_joven.</p>
+        </div>
+        <nav aria-label="Secciones">
+          <h2>Producto</h2>
+          <ul>
+            <li><a href="#como-funciona">Cómo funciona</a></li>
+            <li><a href="#producto">Módulos</a></li>
+            <li><a href="#confianza">Salvaguardas</a></li>
+            <li><a href="#estado">Estado del proyecto</a></li>
+            <li><a href="#ayuda">Líneas de apoyo</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>Fuentes oficiales</h2>
+          <ul>
+            <li><a href="https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/VS/PP/ET/directorio-salud-mental-prevencion-suicidio-minsalud.pdf" target="_blank" rel="noopener">Directorio MinSalud<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+            <li><a href="https://www.ins.gov.co/Noticias/Paginas/Problemas-familiares-el-factor-que-m%C3%A1s-afecta-la-salud-mental-de-los-colombianos.aspx" target="_blank" rel="noopener">Instituto Nacional de Salud<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+            <li><a href="https://villavicencio.gov.co/linea-emocional-yo-te-escucho-atendio-441-casos-en-salud-mental-durante-el-ultimo-trimestre/" target="_blank" rel="noopener">Alcaldía de Villavicencio<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+            <li><a href="https://www1.funcionpublica.gov.co/preguntas-frecuentes/-/asset_publisher/sqxafjubsrEu/content/linea-unica-de-emergencias-nacional-123/28585938" target="_blank" rel="noopener">Función Pública · 123<span class="sr-only"> (se abre en una pestaña nueva)</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__legal">
+        <p>Cerca no es un servicio de salud ni de emergencias: no diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te ayuda a encontrar servicios institucionales que pueden orientarte. Las líneas de apoyo se muestran con su fuente oficial y su fecha de consulta; los datos pueden cambiar, así que verifica siempre en la fuente oficial.</p>
+        <p>Prototipo académico en nivel TRL 4: funciona en un entorno controlado con datos sintéticos y escenarios ficticios; no está disponible para uso público. Proyecto independiente: las instituciones mencionadas aparecen solo como fuentes de información; su mención no implica aval, alianza ni representación oficial.</p>
+        <p>Esta página no pide datos personales y no usa cookies ni rastreadores. Tipografía Geist (SIL Open Font License 1.1).</p>
+      </div>
+      <div class="footer__bottom">
+        <p class="source-note">Hackathon Villavicencio 2026 · Reto 01</p>
+        <button class="motion-toggle-text" type="button" data-motion-toggle aria-label="Pausar animaciones">
+          <span data-motion-label>Pausar animaciones</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
