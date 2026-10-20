@@ -600,6 +600,8 @@ html[data-motion="paused"] .motion-toggle .icon-play {
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 92, 138, 0.08);
+  max-height: calc(100dvh - var(--nav-h) - 56px);
+  overflow-y: auto;
   opacity: 0;
   transform: translateY(-6px) scale(0.98);
   transform-origin: top right;
@@ -1459,7 +1461,7 @@ html:not(.js) .rotator__word:not(:first-child) {
 }
 
 .js .statement .w {
-  color: rgba(245, 245, 248, 0.16);
+  color: rgba(245, 245, 248, 0.42);
   transition: color 0.35s;
 }
 
@@ -1594,7 +1596,7 @@ html:not(.js) .rotator__word:not(:first-child) {
 }
 
 .js .step {
-  opacity: 0.32;
+  opacity: 0.7;
   transition: opacity 0.5s;
 }
 
@@ -1625,7 +1627,7 @@ html:not(.js) .rotator__word:not(:first-child) {
 .step__num {
   font-family: var(--mono);
   font-size: 0.8125rem;
-  color: var(--text-3);
+  color: var(--text-2);
   margin-bottom: 14px;
 }
 
@@ -2237,7 +2239,7 @@ html:not(.js) .rotator__word:not(:first-child) {
   font-family: var(--mono);
   font-size: 0.625rem;
   color: var(--text-2);
-  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .event__name {
@@ -2976,6 +2978,18 @@ html:not(.js) .rotator__word:not(:first-child) {
   grid-column: 1 / -1;
 }
 
+.help-inline__actions .btn {
+  max-width: 100%;
+  padding-block: 10px;
+  line-height: 1.3;
+  text-align: center;
+  white-space: normal;
+}
+
+.help-block__head .chip {
+  white-space: normal;
+}
+
 /* Maquetas: detalles */
 .map__legend {
   position: absolute;
@@ -3030,6 +3044,17 @@ html:not(.js) .rotator__word:not(:first-child) {
 
 .tabs__note {
   margin-top: 28px;
+}
+
+.fake-btn--help {
+  margin-top: 12px;
+  border-color: rgba(255, 92, 138, 0.45);
+  background: rgba(255, 92, 138, 0.1);
+}
+
+.reader__actions .fake-btn--help,
+.flow__why .fake-btn--help {
+  margin-top: 0;
 }
 
 .screen__src {
@@ -3114,6 +3139,34 @@ html[data-motion="paused"] .map__route {
   animation-play-state: paused;
 }
 
+/* En pausa, la marquesina se convierte en una lista estática completa. */
+html[data-motion="paused"] .marquee {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+html[data-motion="paused"] .marquee__track {
+  width: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: none;
+}
+
+html[data-motion="paused"] .marquee__group {
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 12px;
+}
+
+html[data-motion="paused"] .marquee__group[aria-hidden] {
+  display: none;
+}
+
+html[data-motion="paused"] .marquee__item {
+  gap: 14px;
+  padding-inline: 10px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -3164,6 +3217,8 @@ html[data-motion="paused"] .map__route {
     top: 100%;
     left: 0;
     right: 0;
+    max-height: calc(100dvh - var(--nav-h));
+    overflow-y: auto;
     padding: 12px var(--gutter) 24px;
     border-bottom: 1px solid var(--line);
     background: rgba(5, 5, 10, 0.97);
@@ -3401,7 +3456,14 @@ html[data-motion="paused"] .map__route {
   }
 
   .nav__inner {
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .help-btn {
+    gap: 6px;
+    padding: 0 12px 0 10px;
+    font-size: 0.8125rem;
+    white-space: nowrap;
   }
 
   .motion-toggle {

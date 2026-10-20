@@ -59,9 +59,9 @@
       <p class="helpbar__lead"><span class="pulse" aria-hidden="true"></span>¿Necesitas hablar con alguien ahora?</p>
       <ul class="helpbar__lines">
         <li><a href="tel:106" aria-label="Llamar a la Línea 106, salud mental, 24 horas">Línea 106</a> <span class="helpbar__meta">· 24/7</span></li>
-        <li><a href="tel:018000931089" aria-label="Llamar gratis a Yo Te Escucho Villavicencio: 01 8000 931 089">Yo Te Escucho 01 8000 931 089</a> <span class="helpbar__meta">· gratuita</span></li>
+        <li><a href="tel:018000931089"><span class="sr-only">Llamar gratis a </span>Yo Te Escucho 01 8000 931 089<span class="sr-only">, Villavicencio</span></a> <span class="helpbar__meta">· gratuita</span></li>
       </ul>
-      <p class="helpbar__source">Fuente: Directorio MinSalud · consultado 19 oct 2026</p>
+      <p class="helpbar__source">Fuentes: MinSalud (19 oct) · Alcaldía (20 oct 2026)</p>
     </div>
   </aside>
 
@@ -90,7 +90,7 @@
           <button class="help-btn" type="button" data-help-btn aria-expanded="false" aria-controls="help-panel">
             <span class="pulse" aria-hidden="true"></span>
             <span class="help-btn__text-long">Líneas de apoyo</span>
-            <span class="help-btn__text-short">Ayuda</span>
+            <span class="help-btn__text-short">Líneas de apoyo</span>
           </button>
           <a class="btn btn--primary btn--sm nav-cta" href="#producto">Ver el producto</a>
           <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú">
@@ -204,11 +204,11 @@
 
         <!-- Ventana animada del prototipo (decorativa; descrita en texto para lectores de pantalla) -->
         <figure class="demo-wrap">
-          <figcaption class="sr-only">Vista animada del prototipo: una persona elige "Hablar con alguien" y "WhatsApp", y el flujo guiado muestra servicios que pueden orientarla, cada uno con su fuente oficial y fecha de consulta.</figcaption>
+          <figcaption class="sr-only">Vista animada del prototipo con datos ficticios: una persona elige “Hablar con alguien” y “WhatsApp”, y la ruta guiada muestra servicios de ejemplo que pueden orientarla, cada uno con fuente y fecha de consulta.</figcaption>
           <div class="demo" data-demo aria-hidden="true">
             <div class="demo__chrome">
               <div class="demo__dots"><i></i><i></i><i></i></div>
-              <div class="demo__url">cerca · flujo guiado</div>
+              <div class="demo__url">cerca · ruta guiada</div>
               <span class="chip chip--amber">Datos ficticios</span>
             </div>
             <div class="demo__body">
@@ -264,7 +264,7 @@
                     <div class="result__row">
                       <div>
                         <p class="result__name">Orientación escolar · Colegio Ejemplo 01</p>
-                        <p class="result__meta">Presencial · horario escolar</p>
+                        <p class="result__meta">WhatsApp · horario escolar</p>
                       </div>
                       <span class="chip chip--amber"><svg aria-hidden="true"><use href="#i-clock"/></svg>Revisión próxima</span>
                     </div>
@@ -355,7 +355,7 @@
             <a class="btn btn--primary btn--sm" href="tel:106"><svg aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 106</a>
             <a class="btn btn--ghost btn--sm" href="tel:018000931089"><svg aria-hidden="true"><use href="#i-phone"/></svg>Yo Te Escucho · 01 8000 931 089</a>
           </div>
-          <p class="source-note help-inline__src">Fuente: Directorio de salud mental y prevención del suicidio, MinSalud · consultado el 19 oct 2026.</p>
+          <p class="source-note help-inline__src">Fuentes: Directorio de salud mental y prevención del suicidio, MinSalud (consultado el 19 oct 2026) y Alcaldía de Villavicencio (consultado el 20 oct 2026).</p>
         </div>
 
         <h3 class="sub-head" data-reveal>Lo que hoy se interpone</h3>
@@ -399,7 +399,7 @@
               <div class="phone__screen">
                 <!-- Pantalla 1 -->
                 <div class="screen">
-                  <div class="screen__top"><span>Cerca</span><span>Sin cuenta</span></div>
+                  <div class="screen__top"><span>Cerca · sin cuenta</span><span class="chip chip--pink">Líneas de apoyo</span></div>
                   <p class="screen__title">¿Qué estás buscando?</p>
                   <p class="screen__sub">Para ti o para alguien más. No necesitas dar tu nombre.</p>
                   <div class="screen__chips">
@@ -427,7 +427,7 @@
                 </div>
                 <!-- Pantalla 3 -->
                 <div class="screen">
-                  <div class="screen__top"><span>Paso 3 de 3</span><span>2 resultados</span></div>
+                  <div class="screen__top"><span>Paso 3 de 3</span><span class="chip chip--pink">Líneas de apoyo</span></div>
                   <div class="screen__bar"><i style="width:100%"></i></div>
                   <p class="screen__title">Pueden orientarte</p>
                   <p class="screen__sub">Con canal, horario, fuente y fecha.</p>
@@ -453,7 +453,7 @@
                   <span class="screen__btn"><svg><use href="#i-phone"/></svg>Llamar</span>
                   <span class="screen__btn screen__btn--alt"><svg><use href="#i-chat"/></svg>Escribir</span>
                   <span class="screen__btn screen__btn--alt"><svg><use href="#i-pin"/></svg>Cómo llegar</span>
-                  <p class="screen__foot"><svg style="display:inline;width:11px;height:11px;vertical-align:-1px"><use href="#i-flag"/></svg> ¿Este dato no funciona? Repórtalo</p>
+                  <p class="screen__foot"><svg style="display:inline;width:11px;height:11px;vertical-align:-1px"><use href="#i-flag"/></svg> ¿Este dato no funciona? Repórtalo · <span class="chip chip--pink">Líneas de apoyo</span></p>
                 </div>
               </div>
             </div>
@@ -518,17 +518,18 @@
                   <span class="chip chip--lime"><svg><use href="#i-check"/></svg>Verificado</span>
                 </div>
                 <p class="result__src">Fuente: entidad oficial (ejemplo) · consultado 19 oct 2026</p>
+                <span class="fake-btn fake-btn--help">Líneas de apoyo</span>
               </div>
             </div>
           </div>
           <div class="tabpanel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" hidden>
             <div class="tabpanel__copy">
-              <h3 class="tabpanel__title">Tres preguntas. Un servicio que puede orientarte.</h3>
+              <h3 class="tabpanel__title">Dos o tres preguntas. Los servicios que pueden orientarte.</h3>
               <p class="tabpanel__body">Un flujo de opciones cerradas te indica qué servicio puede orientar tu consulta. No evalúa tu riesgo ni interpreta lo que sientes: te muestra la ruta institucional que corresponde y por qué.</p>
               <ul class="ticks"><li><svg aria-hidden="true"><use href="#i-check"/></svg>Preguntas sobre el tipo de orientación, nunca sobre síntomas</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Reglas claras y revisables: ves por qué aparece cada servicio</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Botón para hablar con una persona en cada paso</li></ul>
             </div>
             <div class="mock" aria-hidden="true">
-              <div class="mock__bar"><span>cerca · ruta guiada</span><span class="chip chip--amber">Escenario ficticio 03</span></div>
+              <div class="mock__bar"><span>cerca · ruta guiada</span><span class="chip chip--amber">Escenario ficticio</span></div>
               <div class="mock__body">
                 <div class="screen__bar"><i style="width:100%"></i></div>
                 <div class="flow" data-flow>
@@ -559,8 +560,8 @@
                   </div>
                 </div>
                 <div class="flow__why">
-                  <p><b>Por qué ves esto:</b> elegiste hablar con alguien, para ti, por llamada.</p>
-                  <span class="fake-btn"><svg><use href="#i-phone"/></svg>Hablar con una persona ahora</span>
+                  <p><b>Por qué ves esto:</b> elegiste hablar con alguien, para ti.</p>
+                  <span class="fake-btn fake-btn--help"><svg><use href="#i-phone"/></svg>Hablar con una persona ahora</span>
                 </div>
               </div>
             </div>
@@ -576,7 +577,7 @@
               <div class="mock__body">
                 <div class="events">
                   <div class="event">
-                    <div class="event__date"><b>JUE</b><span>2:00 p. m.</span></div>
+                    <div class="event__date"><b>JUE</b><span>2:00 p.&nbsp;m.</span></div>
                     <div>
                       <p class="event__name">Taller de manejo del estrés</p>
                       <p class="event__meta">Colegio Ejemplo 01 · Orientación escolar</p>
@@ -584,7 +585,7 @@
                     </div>
                   </div>
                   <div class="event">
-                    <div class="event__date"><b>SÁB</b><span>3:00 p. m.</span></div>
+                    <div class="event__date"><b>SÁB</b><span>3:00 p.&nbsp;m.</span></div>
                     <div>
                       <p class="event__name">Tarde de deporte y bienestar</p>
                       <p class="event__meta">JAC Barrio Demo · Cancha comunal</p>
@@ -592,11 +593,11 @@
                     </div>
                   </div>
                   <div class="event">
-                    <div class="event__date"><b>MIÉ</b><span>4:00 p. m.</span></div>
+                    <div class="event__date"><b>MIÉ</b><span>4:00 p.&nbsp;m.</span></div>
                     <div>
                       <p class="event__name">Cine foro: hablemos de emociones</p>
                       <p class="event__meta">Biblioteca de ejemplo</p>
-                      <div class="screen__tags"><span class="chip">Gratis</span><span class="chip chip--amber">En revisión</span></div>
+                      <div class="screen__tags"><span class="chip">Gratis</span><span class="chip chip--lime"><svg><use href="#i-check"/></svg>Revisado</span></div>
                     </div>
                   </div>
                 </div>
@@ -604,6 +605,7 @@
                   <span>¿Organizas una actividad? Se publica después de una revisión.</span>
                   <span class="fake-btn"><svg><use href="#i-calendar"/></svg>Publicar</span>
                 </div>
+                <span class="fake-btn fake-btn--help">Líneas de apoyo</span>
               </div>
             </div>
           </div>
@@ -629,6 +631,7 @@
                 <div class="reader__actions">
                   <span class="fake-btn"><svg><use href="#i-external"/></svg>Ver documento original</span>
                   <span class="fake-btn"><svg><use href="#i-flag"/></svg>Reportar dato desactualizado</span>
+                  <span class="fake-btn fake-btn--help">Líneas de apoyo</span>
                 </div>
               </div>
             </div>
@@ -726,7 +729,7 @@
       <div class="container status">
         <div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>estado_del_proyecto</span></p>
-          <h2 class="h-section" id="status-title" style="margin-top:20px" data-reveal>TRL 4. Ni más, ni menos.</h2>
+          <h2 class="h-section" id="status-title" style="margin-top:20px" data-reveal>TRL 4. Ni más ni menos.</h2>
           <p class="lead" style="margin-top:20px" data-reveal>Cerca es un prototipo académico creado para la Hackathon Villavicencio 2026 · Reto 01. Su meta en este reto es TRL 4: funciones críticas integradas y funcionando en un entorno controlado, probadas con datos sintéticos y escenarios ficticios. No está disponible para uso público y no se ha probado con jóvenes ni con público.</p>
           <h3 class="sub-head sub-head--sm" data-reveal>Próximos pasos</h3>
           <ol class="next-steps" role="list" data-reveal>
@@ -759,16 +762,7 @@
       </div>
     </section>
 
-    <!-- ================================================================ <details><summary>¿Cerca es un servicio de salud?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Cerca es una herramienta de información y navegación. No diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te muestra qué servicios institucionales pueden orientarte y cómo contactarlos.</p></div></details>
-          <details><summary>¿Puedo usar Cerca hoy?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Todavía no. Cerca es un prototipo TRL 4 que funciona solo en un entorno controlado, con datos ficticios. No está disponible para uso público. Si necesitas apoyo ahora, usa las líneas oficiales del botón “Líneas de apoyo”.</p></div></details>
-          <details><summary>¿Qué datos guardan sobre mí?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Ninguno. Cerca está diseñado para no pedir datos personales ni de salud: no hay cuenta, nombre ni correo. Si reportas un dato que no funciona, solo se registra qué dato falló y cuándo. Esta página no pide ni guarda datos personales ni de salud, y no usa cookies de seguimiento.</p></div></details>
-          <details><summary>¿Quién verifica la información?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cada dato sale de una fuente oficial y muestra la fecha en que se consultó. El plan de operación propone un rol responsable que revisa cada dato en un ciclo fijo y registra cada cambio. Si un dato no tiene fuente ni fecha, no se muestra.</p></div></details>
-          <details><summary>¿Qué pasa si un teléfono o enlace no funciona?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Lo reportas con el botón de la misma ficha, sin incluir datos personales. El dato pasa a “En revisión”, deja de mostrarse como vigente y el responsable lo confirma o lo corrige contra la fuente oficial. Mientras tanto, ves otras opciones verificadas.</p></div></details>
-          <details><summary>¿Usa inteligencia artificial?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>La ruta guiada funciona con reglas claras y opciones cerradas, no con un chatbot. Cerca no conversa contigo como lo haría un profesional. Si en el futuro se usa IA, será solo con información validada, con límites visibles y siempre con un camino directo a personas de servicios oficiales.</p></div></details>
-          <details><summary>¿Es gratis?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca está pensado para ser gratuito y sin publicidad. Hoy es un prototipo de hackatón. Las condiciones de cada servicio las define la entidad que lo presta, y las mostramos cuando la fuente oficial las publica.</p></div></details>
-          <details><summary>¿Puedo buscar orientación para un amigo?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Sí. La ruta guiada tiene una opción para cuando la consulta es por otra persona. Te muestra qué servicios pueden orientarte a ti y a quien te preocupa.</p></div></details>
-          <details><summary>¿Y si estoy pasando por un momento muy difícil ahora?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca no atiende emergencias, pero hay personas que sí pueden escucharte. Puedes comunicarte con la Línea 106 o con Yo Te Escucho Villavicencio desde el botón “Líneas de apoyo”. Hablar con alguien es un buen primer paso. Si tu vida o la de otra persona está en peligro inmediato, llama al 123 o acude al servicio de urgencias más cercano.</p></div></details>
-          <details><summary>¿Cerca está avalado por alguna entidad?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Es un proyecto independiente creado en la Hackathon Villavicencio 2026. Las instituciones que se mencionan aparecen solo como fuentes de información. Su mención no implica aval, alianza ni representación oficial.</p></div></details> -->
+    <!-- ================================================================ PREGUNTAS FRECUENTES -->
     <section class="section" id="preguntas" aria-labelledby="faq-title">
       <div class="container">
         <div class="section-head section-head--center">
@@ -777,14 +771,14 @@
         </div>
         <div class="faq" data-reveal>
           <details><summary>¿Cerca es un servicio de salud?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Cerca es una herramienta de información y navegación. No diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te muestra qué servicios institucionales pueden orientarte y cómo contactarlos.</p></div></details>
-          <details><summary>¿Puedo usar Cerca hoy?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Todavía no. Cerca es un prototipo TRL 4 que funciona solo en un entorno controlado, con datos ficticios. No está disponible para uso público. Si necesitas apoyo ahora, usa las líneas oficiales del botón “Líneas de apoyo”.</p></div></details>
+          <details><summary>¿Puedo usar Cerca hoy?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Todavía no. Cerca es un prototipo TRL 4 que funciona solo en un entorno controlado, con datos ficticios. No está disponible para uso público. Si necesitas apoyo ahora, usa las <a href="#ayuda">líneas de apoyo oficiales</a>.</p></div></details>
           <details><summary>¿Qué datos guardan sobre mí?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Ninguno. Cerca está diseñado para no pedir datos personales ni de salud: no hay cuenta, nombre ni correo. Si reportas un dato que no funciona, solo se registra qué dato falló y cuándo. Esta página no pide ni guarda datos personales ni de salud, y no usa cookies de seguimiento.</p></div></details>
           <details><summary>¿Quién verifica la información?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cada dato sale de una fuente oficial y muestra la fecha en que se consultó. El plan de operación propone un rol responsable que revisa cada dato en un ciclo fijo y registra cada cambio. Si un dato no tiene fuente ni fecha, no se muestra.</p></div></details>
           <details><summary>¿Qué pasa si un teléfono o enlace no funciona?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Lo reportas con el botón de la misma ficha, sin incluir datos personales. El dato pasa a “En revisión”, deja de mostrarse como vigente y el responsable lo confirma o lo corrige contra la fuente oficial. Mientras tanto, ves otras opciones verificadas.</p></div></details>
           <details><summary>¿Usa inteligencia artificial?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>La ruta guiada funciona con reglas claras y opciones cerradas, no con un chatbot. Cerca no conversa contigo como lo haría un profesional. Si en el futuro se usa IA, será solo con información validada, con límites visibles y siempre con un camino directo a personas de servicios oficiales.</p></div></details>
           <details><summary>¿Es gratis?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca está pensado para ser gratuito y sin publicidad. Hoy es un prototipo de hackatón. Las condiciones de cada servicio las define la entidad que lo presta, y las mostramos cuando la fuente oficial las publica.</p></div></details>
           <details><summary>¿Puedo buscar orientación para un amigo?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Sí. La ruta guiada tiene una opción para cuando la consulta es por otra persona. Te muestra qué servicios pueden orientarte a ti y a quien te preocupa.</p></div></details>
-          <details><summary>¿Y si estoy pasando por un momento muy difícil ahora?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca no atiende emergencias, pero hay personas que sí pueden escucharte. Puedes comunicarte con la Línea 106 o con Yo Te Escucho Villavicencio desde el botón “Líneas de apoyo”. Hablar con alguien es un buen primer paso. Si tu vida o la de otra persona está en peligro inmediato, llama al 123 o acude al servicio de urgencias más cercano.</p></div></details>
+          <details><summary>¿Y si estoy pasando por un momento muy difícil ahora?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>Cerca no atiende emergencias, pero hay personas que sí pueden escucharte. Puedes comunicarte con la Línea 106 o con Yo Te Escucho Villavicencio desde las <a href="#ayuda">líneas de apoyo oficiales</a>, con su fuente y fecha de consulta. Hablar con alguien es un buen primer paso. Si tu vida o la de otra persona está en peligro inmediato, llama al 123 o acude al servicio de urgencias más cercano.</p></div></details>
           <details><summary>¿Cerca está avalado por alguna entidad?<span class="faq__icon" aria-hidden="true"></span></summary><div class="faq__answer"><p>No. Es un proyecto independiente creado en la Hackathon Villavicencio 2026. Las instituciones que se mencionan aparecen solo como fuentes de información. Su mención no implica aval, alianza ni representación oficial.</p></div></details>
         </div>
       </div>
@@ -797,7 +791,7 @@
           <div class="cta__bg" aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true" style="margin-bottom:20px"><span class="eyebrow__caret">&gt;</span> acortemos_la_distancia</p>
           <h2 class="h-section" id="cta-title">¿Eres colegio, orientador o institución? Mira el prototipo.</h2>
-          <p class="lead">Te mostramos los escenarios de prueba ficticios, los resultados obtenidos y las limitaciones, sin adornos. También cómo se mantendría cada dato verificado, con responsables claros.</p>
+          <p class="lead">Aquí ves los escenarios de prueba ficticios, las salvaguardas y cómo se mantendría cada dato verificado, con responsables claros. Los resultados y las limitaciones se documentan en el reporte de pruebas del equipo.</p>
           <div class="cta__actions">
             <a class="btn btn--primary" href="#producto">Ver el producto <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
             <a class="btn btn--ghost" href="#confianza">Ver cómo verificamos</a>
@@ -806,7 +800,7 @@
 
         <div class="card help-block" id="ayuda" tabindex="-1" aria-labelledby="ayuda-title">
           <div class="help-block__head">
-            <h2 class="help-block__title" id="ayuda-title"><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>Si lo necesitas ahora, estas líneas oficiales te escuchan.</h2>
+            <h2 class="help-block__title" id="ayuda-title"><span class="icon-tile icon-tile--pink"><svg aria-hidden="true"><use href="#i-heart"/></svg></span>Si lo necesitas ahora, estas líneas oficiales pueden ayudarte.</h2>
             <span class="chip">Te atienden personas, no Cerca</span>
           </div>
           <ul class="help-cards" role="list">

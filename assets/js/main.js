@@ -107,9 +107,19 @@
   });
   helpBtn?.addEventListener("click", () => setHelp(!helpPanel.classList.contains("is-open")));
 
+  /* Un enlace interno del panel lo cierra; salir del panel con Tab también. */
+  helpPanel?.addEventListener("click", (e) => {
+    if (e.target.closest("a[href^='#']")) setHelp(false);
+  });
+  helpPanel?.addEventListener("focusout", (e) => {
+    if (e.relatedTarget && !helpPanel.contains(e.relatedTarget) && e.relatedTarget !== helpBtn) setHelp(false);
+  });
+
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    if (helpPanel?.classList.contains("is-open")) setHelp(false, { returnFocus: true });
+    if (helpPanel?.classList.contains("is-open")) {
+      setHelp(false, { returnFocus: helpPanel.contains(document.activeElement) });
+    }
     if (mobileMenu && !mobileMenu.hidden) {
       setMenu(false);
       menuBtn.focus();
@@ -795,6 +805,7 @@
     const DURATION = 7000;
     let index = Math.max(0, tabs.findIndex((t) => t.getAttribute("aria-selected") === "true"));
     let auto = true;
+    let userStopped = false;
     let progress = 0;
     let raf = 0;
     let last = 0;
@@ -811,7 +822,10 @@
     function select(i, { focus = false, user = false } = {}) {
       index = (i + tabs.length) % tabs.length;
       progress = 0;
-      if (user) auto = false;
+      if (user) {
+        auto = false;
+        userStopped = true;
+      }
       tabs.forEach((t, k) => {
         const on = k === index;
         t.setAttribute("aria-selected", String(on));
@@ -876,7 +890,8 @@
     });
     document.addEventListener("visibilitychange", tick);
     motion.onChange((paused) => {
-      if (paused) auto = false;
+      auto = !paused && !userStopped;
+      progress = 0;
       paintBar();
       tick();
     });
