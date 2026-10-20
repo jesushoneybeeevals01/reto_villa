@@ -7,13 +7,23 @@
   <meta name="description" content="Prototipo que ayuda a jóvenes de Villavicencio a encontrar información confiable, entender las rutas de apoyo y llegar al servicio que puede orientarlos. Cada dato con fuente oficial y fecha de consulta.">
   <!-- Prototipo (TRL 4): no debe aparecer en buscadores como si fuera un servicio activo. -->
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#05050a">
+  <meta name="theme-color" content="#071225" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f4f8ff" media="(prefers-color-scheme: light)">
   <meta property="og:title" content="Cerca — La ruta clara hacia la ayuda correcta">
   <meta property="og:description" content="Información confiable y rutas de apoyo para jóvenes de Villavicencio, con fuente oficial y fecha de consulta en cada dato.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/geist-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Tema antes del primer pintado: la elección guardada o la del sistema. -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("cerca:theme"); } catch (e) {}
+      if (t !== "light" && t !== "dark") t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/main.js" defer></script>
 </head>
@@ -42,11 +52,13 @@
     <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11.5l-2.2 4 2.2 4H5"/></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6v12M15 6v12"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.6A8.5 8.5 0 0 1 9.4 4 8.5 8.5 0 1 0 20 14.6Z"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3.5 19 11l-6.2 1.6L10 19.5Z" fill="#fff" stroke="#07070c" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="i-logo" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#0b0b13"/><rect x="1.5" y="1.5" width="29" height="29" rx="8.5" stroke="url(#logo-g)" stroke-opacity=".7"/><path d="M9.5 22.5c0-7 6-12.5 13-12.5" stroke="url(#logo-g)" stroke-width="2.6" stroke-linecap="round"/><circle cx="9.5" cy="22.5" r="3" fill="#ff5c8a"/><circle cx="22.5" cy="10" r="3" fill="#bdf54a"/></symbol>
-    <linearGradient id="logo-g" x1="4" y1="28" x2="28" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#ff5c8a"/><stop offset=".5" stop-color="#c06bff"/><stop offset="1" stop-color="#6b93ff"/></linearGradient>
+    <symbol id="i-logo" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="9" fill="#0c1b36"/><rect x="1.5" y="1.5" width="29" height="29" rx="8.5" stroke="url(#logo-g)" stroke-opacity=".7"/><path d="M9.5 22.5c0-7 6-12.5 13-12.5" stroke="url(#logo-g)" stroke-width="2.6" stroke-linecap="round"/><circle cx="9.5" cy="22.5" r="3" fill="#ff7b93"/><circle cx="22.5" cy="10" r="3" fill="#5eead4"/></symbol>
+    <linearGradient id="logo-g" x1="4" y1="28" x2="28" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#38bdf8"/><stop offset=".5" stop-color="#60a5fa"/><stop offset="1" stop-color="#818cf8"/></linearGradient>
   </svg>
 
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -82,6 +94,10 @@
         </ul>
 
         <div class="nav__actions">
+          <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Activar modo claro" title="Activar modo claro">
+            <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+            <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+          </button>
           <button class="icon-btn motion-toggle" type="button" data-motion-toggle aria-label="Pausar animaciones" title="Pausar animaciones">
             <svg class="icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
             <svg class="icon-play" aria-hidden="true"><use href="#i-play"/></svg>
@@ -108,9 +124,16 @@
           <li><a href="#estado">Estado</a></li>
           <li><a href="#preguntas">Preguntas</a></li>
         </ul>
-        <button class="btn btn--ghost" type="button" data-motion-toggle aria-label="Pausar animaciones">
-          <span data-motion-label>Pausar animaciones</span>
-        </button>
+        <div class="mobile-menu__tools">
+          <button class="btn btn--ghost" type="button" data-theme-toggle aria-label="Activar modo claro">
+            <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+            <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+            <span data-theme-label>Modo claro</span>
+          </button>
+          <button class="btn btn--ghost" type="button" data-motion-toggle aria-label="Pausar animaciones">
+            <span data-motion-label>Pausar animaciones</span>
+          </button>
+        </div>
       </div>
 
       <div class="help-panel" id="help-panel" role="region" aria-labelledby="help-panel-title">
@@ -164,7 +187,7 @@
       <div class="container">
         <div class="hero__content">
           <p class="hero__eyebrow">
-            <span class="chip chip--pink">Prototipo TRL 4</span>
+            <span class="chip chip--azure">Prototipo TRL 4</span>
             <span class="hero__eyebrow-long" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>reto_01 · mente_sana_joven · villavicencio</span></span>
             <span class="hero__eyebrow-short" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> reto_01 · villavicencio</span>
             <span class="sr-only">Reto 01, mente sana joven, Villavicencio</span>
@@ -203,6 +226,7 @@
 
         <!-- Ventana animada del prototipo (decorativa; descrita en texto para lectores de pantalla) -->
         <figure class="demo-wrap">
+          <div class="presenter presenter--peek" data-mascot="wave" data-say="¡Hola! Soy Cerquita. Te muestro cómo funciona Cerca." aria-hidden="true"></div>
           <figcaption class="sr-only">Vista animada del prototipo con datos ficticios: una persona elige “Hablar con alguien” y “WhatsApp”, y la ruta guiada muestra servicios de ejemplo que pueden orientarla, cada uno con fuente y fecha de consulta.</figcaption>
           <div class="demo" data-demo aria-hidden="true">
             <div class="demo__chrome">
@@ -326,6 +350,7 @@
     <!-- ================================================================ EL RETO -->
     <section class="section" id="reto" aria-labelledby="reto-title">
       <div class="container">
+        <div class="presenter" data-mascot="think" data-say="Primero, lo que queremos resolver." aria-hidden="true"></div>
         <p class="eyebrow" aria-hidden="true" data-reveal><span class="eyebrow__caret">&gt;</span> <span data-scramble>el_reto</span></p>
         <h2 class="statement" id="reto-title" data-statement style="margin-top:24px">La ayuda existe. <span data-accent>Llegar a ella es lo difícil:</span> la información está regada, los números cambian y no siempre es claro qué servicio orienta cada consulta.</h2>
 
@@ -375,6 +400,7 @@
     <section class="section" id="como-funciona" aria-labelledby="how-title" data-steps>
       <div class="container">
         <div class="section-head">
+          <div class="presenter" data-mascot="point" data-say="Así funciona, paso a paso." aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>como_funciona</span></p>
           <h2 class="h-section" id="how-title" data-reveal>De la duda a una persona real. En cuatro pasos.</h2>
           <p class="lead" data-reveal>Desde tu celular. Sin crear cuenta, sin preguntas sobre tu salud y sin que nadie te juzgue.</p>
@@ -465,6 +491,7 @@
     <section class="section" id="producto" aria-labelledby="product-title">
       <div class="container">
         <div class="section-head">
+          <div class="presenter" data-mascot="cheer" data-say="Estas son las cuatro funciones de Cerca." aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>producto</span></p>
           <h2 class="h-section" id="product-title" data-reveal>Cuatro funciones. Un solo propósito.</h2>
           <p class="lead" data-reveal>Las cuatro funciones que permite el reto, integradas en un mismo prototipo. Todas usan información con fuente y fecha, y todas terminan en servicios atendidos por personas.</p>
@@ -489,7 +516,7 @@
                 <div class="map">
                   <svg class="map__base" viewBox="0 0 400 230" preserveAspectRatio="none">
                     <defs>
-                      <linearGradient id="routeG" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff5c8a"/><stop offset="1" stop-color="#bdf54a"/></linearGradient>
+                      <linearGradient id="routeG" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient>
                     </defs>
                     <path d="M0 40H400M0 90H400M0 140H400M0 190H400M60 0V230M130 0V230M200 0V230M270 0V230M340 0V230" stroke="rgba(255,255,255,.06)" vector-effect="non-scaling-stroke"/>
                     <path d="M-10 205 L175 112 L410 58M92 -10 L150 240M250 -10 L300 240" stroke="rgba(255,255,255,.13)" stroke-width="3" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
@@ -533,7 +560,7 @@
                 <div class="screen__bar"><i style="width:100%"></i></div>
                 <div class="flow" data-flow>
                   <svg class="flow__lines">
-                    <defs><linearGradient id="flowGrad" gradientUnits="userSpaceOnUse" x1="0%" y1="0" x2="100%" y2="0"><stop stop-color="#ff5c8a"/><stop offset="1" stop-color="#bdf54a"/></linearGradient></defs>
+                    <defs><linearGradient id="flowGrad" gradientUnits="userSpaceOnUse" x1="0%" y1="0" x2="100%" y2="0"><stop stop-color="#60a5fa"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
                     <path data-from="a1" data-to="b1"/>
                     <path data-from="a1" data-to="b3"/>
                     <path data-from="a2" data-to="b2"/>
@@ -644,6 +671,7 @@
     <section class="section" id="confianza" aria-labelledby="trust-title">
       <div class="container">
         <div class="section-head">
+          <div class="presenter" data-mascot="tilt" data-say="Esto lo tenemos muy claro: lo que hacemos y lo que no." aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>salvaguardas</span></p>
           <h2 class="h-section" id="trust-title" data-reveal>Lo que Cerca hace. Y lo que nunca hará.</h2>
           <p class="lead" data-reveal>Cerca no es un servicio de salud ni de emergencias. No diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te ayuda a encontrar servicios institucionales que pueden orientarte. Estos límites no van en letra pequeña: están a la vista en cada pantalla.</p>
@@ -700,7 +728,7 @@
           <ul class="fresh__list">
             <li class="fresh__item" style="--c: var(--lime)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-check"/></svg>Verificado</b><span>Revisado dentro de su ciclo de verificación.</span></div></li>
             <li class="fresh__item" style="--c: var(--amber)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-clock"/></svg>Revisión próxima</b><span>Está por vencer: se muestra con un aviso visible.</span></div></li>
-            <li class="fresh__item" style="--c: #8a8aa0"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-flag"/></svg>En revisión</b><span>Venció o tiene un reporte abierto: deja de mostrarse como vigente.</span></div></li>
+            <li class="fresh__item" style="--c: var(--text-3)"><span class="fresh__light" aria-hidden="true"></span><div><b><svg aria-hidden="true"><use href="#i-flag"/></svg>En revisión</b><span>Venció o tiene un reporte abierto: deja de mostrarse como vigente.</span></div></li>
             <li class="source-note">Propuesta: ciclo de 30 días. El plan de operación define los plazos con cada fuente.</li>
           </ul>
         </div>
@@ -711,6 +739,7 @@
     <section class="section" id="para-quien" aria-labelledby="aud-title">
       <div class="container">
         <div class="section-head">
+          <div class="presenter" data-mascot="wave" data-say="¿Para quién pensamos Cerca?" aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>para_quien</span></p>
           <h2 class="h-section" id="aud-title" data-reveal>Para quienes buscan ayuda. Y para quienes la acercan.</h2>
         </div>
@@ -727,6 +756,7 @@
     <section class="section" id="estado" aria-labelledby="status-title">
       <div class="container status">
         <div>
+          <div class="presenter" data-mascot="point" data-say="Te cuento en qué vamos, sin adornos." aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>estado_del_proyecto</span></p>
           <h2 class="h-section" id="status-title" style="margin-top:20px" data-reveal>TRL 4. Ni más ni menos.</h2>
           <p class="lead" style="margin-top:20px" data-reveal>Cerca es un prototipo académico creado para la Hackathon Villavicencio 2026 · Reto 01. Su meta en este reto es TRL 4: funciones críticas integradas y funcionando en un entorno controlado, probadas con datos sintéticos y escenarios ficticios. No está disponible para uso público y no se ha probado con jóvenes ni con público.</p>
@@ -765,6 +795,7 @@
     <section class="section" id="preguntas" aria-labelledby="faq-title">
       <div class="container">
         <div class="section-head section-head--center">
+          <div class="presenter" data-mascot="think" data-say="Estas son las preguntas que más nos hacen." aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true"><span class="eyebrow__caret">&gt;</span> <span data-scramble>preguntas_frecuentes</span></p>
           <h2 class="h-section" id="faq-title" data-reveal>Preguntas frecuentes</h2>
         </div>
@@ -788,6 +819,7 @@
       <div class="container">
         <div class="cta" data-reveal>
           <div class="cta__bg" aria-hidden="true"></div>
+          <div class="presenter presenter--center" data-mascot="wave" data-say="¡Gracias por llegar hasta aquí!" aria-hidden="true"></div>
           <p class="eyebrow" aria-hidden="true" style="margin-bottom:20px"><span class="eyebrow__caret">&gt;</span> acortemos_la_distancia</p>
           <h2 class="h-section" id="cta-title">¿Eres colegio, orientador o institución? Mira el prototipo.</h2>
           <p class="lead">Aquí ves los escenarios de prueba ficticios, las salvaguardas y cómo se mantendría cada dato verificado, con responsables claros. Los resultados y las limitaciones se documentan en el reporte de pruebas del equipo.</p>
@@ -865,13 +897,20 @@
       <div class="footer__legal">
         <p>Cerca no es un servicio de salud ni de emergencias: no diagnostica, no prescribe, no recomienda tratamientos y no evalúa riesgo. Te ayuda a encontrar servicios institucionales que pueden orientarte. Las líneas de apoyo se muestran con su fuente oficial y su fecha de consulta; los datos pueden cambiar, así que verifica siempre en la fuente oficial.</p>
         <p>Prototipo académico en nivel TRL 4: funciona en un entorno controlado con datos sintéticos y escenarios ficticios; no está disponible para uso público. Proyecto independiente: las instituciones mencionadas aparecen solo como fuentes de información; su mención no implica aval, alianza ni representación oficial.</p>
-        <p>Esta página no pide datos personales y no usa cookies ni rastreadores. Tipografía Geist (SIL Open Font License 1.1).</p>
+        <p>Esta página no pide datos personales y no usa cookies ni rastreadores (solo recuerda en tu navegador el tema y la pausa de animaciones que elijas). Tipografías Plus Jakarta Sans y Geist Mono (SIL Open Font License 1.1).</p>
       </div>
       <div class="footer__bottom">
         <p class="source-note">Hackathon Villavicencio 2026 · Reto 01</p>
-        <button class="motion-toggle-text" type="button" data-motion-toggle aria-label="Pausar animaciones">
-          <span data-motion-label>Pausar animaciones</span>
-        </button>
+        <div class="footer__tools">
+          <button class="motion-toggle-text" type="button" data-theme-toggle aria-label="Activar modo claro">
+            <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+            <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+            <span data-theme-label>Modo claro</span>
+          </button>
+          <button class="motion-toggle-text" type="button" data-motion-toggle aria-label="Pausar animaciones">
+            <span data-motion-label>Pausar animaciones</span>
+          </button>
+        </div>
       </div>
     </div>
   </footer>

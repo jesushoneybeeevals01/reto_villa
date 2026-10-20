@@ -70,6 +70,41 @@
   );
 
   /* ------------------------------------------------------------------------
+     Tema claro / oscuro (el script del <head> ya aplicó el tema inicial)
+     ------------------------------------------------------------------------ */
+  const THEME_KEY = "cerca:theme";
+  const lightQuery = window.matchMedia("(prefers-color-scheme: light)");
+  const theme = {
+    listeners: new Set(),
+    get current() {
+      return root.dataset.theme === "light" ? "light" : "dark";
+    },
+    set(value, persist) {
+      root.dataset.theme = value;
+      if (persist) storage.set(THEME_KEY, value);
+      const next = value === "light" ? "oscuro" : "claro";
+      $$("[data-theme-toggle]").forEach((btn) => {
+        btn.setAttribute("aria-label", `Activar modo ${next}`);
+        if (btn.hasAttribute("title")) btn.setAttribute("title", `Activar modo ${next}`);
+        const text = $("[data-theme-label]", btn);
+        if (text) text.textContent = `Modo ${next}`;
+      });
+      this.listeners.forEach((fn) => fn(value));
+    },
+    onChange(fn) {
+      this.listeners.add(fn);
+    },
+  };
+
+  theme.set(theme.current, false);
+  lightQuery.addEventListener?.("change", (e) => {
+    if (!storage.get(THEME_KEY)) theme.set(e.matches ? "light" : "dark", false);
+  });
+  $$("[data-theme-toggle]").forEach((btn) =>
+    btn.addEventListener("click", () => theme.set(theme.current === "light" ? "dark" : "light", true))
+  );
+
+  /* ------------------------------------------------------------------------
      Cabecera: estado al hacer scroll, menú móvil y panel de ayuda
      ------------------------------------------------------------------------ */
   const header = $("[data-header]");
@@ -301,6 +336,22 @@
     let nextSpawn = 0;
     let visible = true;
     const pointer = { x: -1e4, y: -1e4 };
+    let colors = {};
+
+    /* Los colores salen de las variables --net-* del tema activo. */
+    const readColors = () => {
+      const cs = getComputedStyle(root);
+      const rgb = (name) => cs.getPropertyValue(name).trim().split(/\s+/).join(", ");
+      colors = {
+        edge: rgb("--net-edge"),
+        node: rgb("--net-node"),
+        pulse: rgb("--net-pulse"),
+        person: rgb("--net-person"),
+        service: rgb("--net-service"),
+        k: parseFloat(cs.getPropertyValue("--net-alpha")) || 1,
+      };
+    };
+    readColors();
 
     const d2 = (a, b) => (a.x - b.x) ** 2 + (a.y - b.y) ** 2;
 
@@ -404,8 +455,8 @@
           const b = nodes[j];
           const dist = d2(a, b);
           if (dist < LINK2) {
-            const alpha = (1 - Math.sqrt(dist) / LINK) * 0.16;
-            ctx.strokeStyle = `rgba(190, 180, 255, ${alpha.toFixed(3)})`;
+            const alpha = (1 - Math.sqrt(dist) / LINK) * 0.16 * colors.k;
+            ctx.strokeStyle = `rgba(${colors.edge}, ${alpha.toFixed(3)})`;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -414,7 +465,7 @@
         }
         const pd = d2(a, pointer);
         if (pd < 180 * 180) {
-          ctx.strokeStyle = `rgba(255, 140, 180, ${((1 - Math.sqrt(pd) / 180) * 0.35).toFixed(3)})`;
+          ctx.strokeStyle = `rgba(${colors.pulse}, ${((1 - Math.sqrt(pd) / 180) * 0.4).toFixed(3)})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(pointer.x, pointer.y);
@@ -435,16 +486,16 @@
       const first = pts[0];
       const head = pts[pts.length - 1];
       const grad = ctx.createLinearGradient(first.x, first.y, head.x, head.y);
-      grad.addColorStop(0, `rgba(255, 92, 138, ${0.05 * p.fade})`);
-      grad.addColorStop(1, `rgba(255, 120, 170, ${0.9 * p.fade})`);
+      grad.addColorStop(0, `rgba(${colors.person}, ${0.08 * p.fade})`);
+      grad.addColorStop(1, `rgba(${colors.pulse}, ${0.95 * p.fade})`);
       ctx.strokeStyle = grad;
       ctx.lineWidth = 1.6;
       ctx.beginPath();
       pts.forEach((pt, i) => (i ? ctx.lineTo(pt.x, pt.y) : ctx.moveTo(pt.x, pt.y)));
       ctx.stroke();
       if (!p.done) {
-        ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
-        ctx.shadowColor = "rgba(255, 92, 138, 0.9)";
+        ctx.fillStyle = `rgba(${colors.pulse}, 1)`;
+        ctx.shadowColor = `rgba(${colors.pulse}, 0.9)`;
         ctx.shadowBlur = 14;
         ctx.beginPath();
         ctx.arc(head.x, head.y, 2.4, 0, Math.PI * 2);
@@ -457,16 +508,19 @@
       for (const n of nodes) {
         if (n.service) {
           const g = 0.35 + n.glow * 0.65;
-          ctx.fillStyle = `rgba(189, 245, 74, ${(0.08 + n.glow * 0.25).toFixed(3)})`;
+          ctx.fillStyle = `rgba(${colors.service}, ${(0.1 + n.glow * 0.25).toFixed(3)})`;
           ctx.beginPath();
           ctx.arc(n.x, n.y, 7 + n.glow * 8, 0, Math.PI * 2);
           ctx.fill();
-          ctx.fillStyle = `rgba(189, 245, 74, ${g.toFixed(3)})`;
+          ctx.fillStyle = `rgba(${colors.service}, ${g.toFixed(3)})`;
           ctx.beginPath();
           ctx.arc(n.x, n.y, 2.6, 0, Math.PI * 2);
           ctx.fill();
         } else {
-          ctx.fillStyle = n.glow > 0 ? `rgba(255, 92, 138, ${(0.4 + n.glow * 0.6).toFixed(3)})` : "rgba(220, 215, 255, 0.45)";
+          ctx.fillStyle =
+            n.glow > 0
+              ? `rgba(${colors.person}, ${(0.4 + n.glow * 0.6).toFixed(3)})`
+              : `rgba(${colors.node}, ${(0.45 * colors.k).toFixed(3)})`;
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.r + n.glow * 1.8, 0, Math.PI * 2);
           ctx.fill();
@@ -532,6 +586,10 @@
         stop();
         drawStatic();
       } else loop();
+    });
+    theme.onChange(() => {
+      readColors();
+      if (motion.paused || !raf) draw();
     });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(([entry]) => {
@@ -951,6 +1009,137 @@
     draw();
   }
   $$("[data-flow]").forEach(initFlow);
+
+  /* ------------------------------------------------------------------------
+     Cerquita, la mascota: presenta cada sección con un globo de texto.
+     Es decorativa (aria-hidden): no conversa ni orienta a nadie.
+     ------------------------------------------------------------------------ */
+  let mascotCount = 0;
+  const mascotSVG = () => {
+    const id = `cerquita-${(mascotCount += 1)}`;
+    return `<svg class="mascot__svg" viewBox="0 0 120 150" focusable="false">
+      <defs>
+        <linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9ad8ff"/>
+          <stop offset="1" stop-color="#3b82f6"/>
+        </linearGradient>
+      </defs>
+      <ellipse class="mascot__shadow" cx="60" cy="143" rx="24" ry="4.5"/>
+      <g class="mascot__float">
+        <g class="mascot__tilt">
+          <path class="mascot__body" d="M60 10C88.7 10 108 31 108 58.5C108 88 81 109 60 134C39 109 12 88 12 58.5C12 31 31.3 10 60 10Z" fill="url(#${id})"/>
+          <ellipse class="mascot__shine" cx="39" cy="31" rx="12" ry="6.5" transform="rotate(-28 39 31)"/>
+          <path class="mascot__arm mascot__arm--l" d="M22 84Q9 92 8 108"/>
+          <path class="mascot__arm mascot__arm--r" d="M98 84Q111 92 112 108"/>
+          <g class="mascot__eye"><ellipse cx="45" cy="56" rx="9.5" ry="11" fill="#fff"/><g class="mascot__look"><circle cx="45" cy="57" r="5.2" fill="#0b1b3a"/><circle cx="46.8" cy="54.6" r="1.8" fill="#fff"/></g></g>
+          <g class="mascot__eye"><ellipse cx="75" cy="56" rx="9.5" ry="11" fill="#fff"/><g class="mascot__look"><circle cx="75" cy="57" r="5.2" fill="#0b1b3a"/><circle cx="76.8" cy="54.6" r="1.8" fill="#fff"/></g></g>
+          <ellipse class="mascot__cheek" cx="33" cy="73" rx="6.5" ry="3.8"/>
+          <ellipse class="mascot__cheek" cx="87" cy="73" rx="6.5" ry="3.8"/>
+          <path class="mascot__mouth mascot__mouth--smile" d="M51 73Q60 82 69 73"/>
+          <circle class="mascot__mouth mascot__mouth--o" cx="60" cy="77" r="3.2"/>
+        </g>
+      </g>
+    </svg>`;
+  };
+
+  function initPresenter(host) {
+    const say = host.dataset.say || "";
+    const pose = host.dataset.mascot || "wave";
+    const isPeek = host.classList.contains("presenter--peek");
+    host.innerHTML = `
+      <div class="mascot mascot--${pose}">${mascotSVG()}</div>
+      <p class="presenter__bubble">
+        ${isPeek ? '<span class="presenter__name">Cerquita</span>' : ""}
+        <span class="presenter__say"><span class="presenter__ghost"></span><span class="presenter__typed"></span></span>
+      </p>`;
+    $(".presenter__ghost", host).textContent = say;
+    const typed = $(".presenter__typed", host);
+    const svg = $(".mascot__svg", host);
+    let typingTimer = 0;
+
+    const type = () => {
+      window.clearInterval(typingTimer);
+      if (motion.paused) {
+        typed.textContent = say;
+        host.classList.add("is-typed");
+        return;
+      }
+      let i = 0;
+      typed.textContent = "";
+      host.classList.remove("is-typed");
+      window.setTimeout(() => {
+        typingTimer = window.setInterval(() => {
+          i += 1;
+          typed.textContent = say.slice(0, i);
+          if (i >= say.length) {
+            window.clearInterval(typingTimer);
+            host.classList.add("is-typed");
+          }
+        }, 32);
+      }, 520);
+    };
+
+    motion.onChange((paused) => {
+      if (paused) {
+        window.clearInterval(typingTimer);
+        typed.textContent = say;
+        host.classList.add("is-typed");
+      }
+    });
+
+    /* Al tocarla, saluda y repite su frase. */
+    host.addEventListener("click", () => {
+      if (motion.paused) return;
+      host.classList.remove("is-hello");
+      void host.offsetWidth;
+      host.classList.add("is-hello");
+      type();
+    });
+
+    onceInView(host, type);
+    return svg;
+  }
+
+  const mascots = $$("[data-mascot]").map(initPresenter);
+
+  /* Los ojos siguen al puntero (solo las mascotas visibles en pantalla). */
+  if (mascots.length && "IntersectionObserver" in window) {
+    const visibleMascots = new Set();
+    const eyeIO = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visibleMascots.add(entry.target);
+        else visibleMascots.delete(entry.target);
+      });
+    });
+    mascots.forEach((svg) => eyeIO.observe(svg));
+    let eyeFrame = 0;
+    document.addEventListener(
+      "pointermove",
+      (e) => {
+        if (eyeFrame || motion.paused) return;
+        eyeFrame = requestAnimationFrame(() => {
+          eyeFrame = 0;
+          visibleMascots.forEach((svg) => {
+            const rect = svg.getBoundingClientRect();
+            const dx = e.clientX - (rect.left + rect.width / 2);
+            const dy = e.clientY - (rect.top + rect.height * 0.38);
+            const dist = Math.hypot(dx, dy) || 1;
+            const reach = Math.min(1, dist / 240) * 3.2;
+            svg.style.setProperty("--lx", `${((dx / dist) * reach).toFixed(2)}px`);
+            svg.style.setProperty("--ly", `${((dy / dist) * reach).toFixed(2)}px`);
+          });
+        });
+      },
+      { passive: true }
+    );
+    motion.onChange((paused) => {
+      if (!paused) return;
+      mascots.forEach((svg) => {
+        svg.style.removeProperty("--lx");
+        svg.style.removeProperty("--ly");
+      });
+    });
+  }
 
   /* ------------------------------------------------------------------------
      Foco de luz que sigue al puntero en las tarjetas

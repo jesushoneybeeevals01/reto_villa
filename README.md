@@ -25,12 +25,14 @@ Luego abre <http://localhost:8080>. También funciona en GitHub Pages (el archiv
 index.html              Página única (contenido y marcado)
 assets/css/styles.css   Estilos (tokens, componentes, responsive, movimiento)
 assets/js/main.js       Interacciones en JavaScript sin dependencias
-assets/fonts/           Geist y Geist Mono (subconjunto latino, auto-alojadas) + licencia OFL
+assets/fonts/           Plus Jakarta Sans y Geist Mono (subconjunto latino, auto-alojadas) + licencias OFL
 assets/img/favicon.svg  Ícono
 ```
 
 ## Secciones
 
+0. **Cerquita**, la mascota (un pin de mapa), presenta cada sección con un globo de texto: aparece con
+   un rebote, parpadea, saluda y sigue el cursor con la mirada. Es decorativa: no conversa ni orienta.
 1. Franja de ayuda inmediata y botón fijo **Líneas de apoyo** (panel con fuente y fecha).
 2. Hero con titular rotativo, red de rutas animada en canvas y una ventana que simula el flujo guiado.
 3. Marquesina de principios y fuentes oficiales (en texto, sin logos).
@@ -39,6 +41,14 @@ assets/img/favicon.svg  Ícono
 6. Producto: las cuatro funciones permitidas en pestañas con avance automático y maquetas con datos ficticios.
 7. Salvaguardas: qué hace y qué nunca hará, ciclo de verificación e indicador de vigencia.
 8. Para quién, estado del proyecto (TRL 4), cómo lo probamos, preguntas frecuentes y bloque final de ayuda.
+
+## Temas
+
+- **Modo claro y modo oscuro** (azul marino). Al entrar se usa la preferencia del sistema; el botón de
+  sol/luna de la cabecera (o del menú y el pie de página) cambia el tema y recuerda la elección.
+- Todos los colores son variables en `:root` (oscuro) y `:root[data-theme="light"]` (claro), en
+  `assets/css/styles.css`. Para que el modo claro sea siempre el inicial, cambia la condición del
+  script del `<head>` en `index.html`.
 
 ## Accesibilidad y movimiento
 
@@ -80,7 +90,8 @@ superior, el panel **Líneas de apoyo**, el bloque después de las cifras y el b
 - **Trabajo previo:** ninguno; la landing se creó durante la hackathon.
 - **Herramientas:** HTML, CSS y JavaScript sin frameworks. Desarrollo asistido con IA (Claude Code, de
   Anthropic) para código, textos y verificación de fuentes; el equipo debe revisar y validar todo el contenido.
-- **Componentes de terceros:** tipografías Geist y Geist Mono (SIL Open Font License 1.1, ver
-  `assets/fonts/OFL-Geist.txt`). Los íconos y el logotipo se dibujaron para este proyecto.
+- **Componentes de terceros:** tipografías Plus Jakarta Sans y Geist Mono (SIL Open Font License 1.1,
+  ver `assets/fonts/OFL-PlusJakartaSans.txt` y `assets/fonts/OFL-Geist.txt`). Los íconos, el logotipo y
+  la mascota Cerquita se dibujaron para este proyecto.
 - **Inspiración visual:** scale.com (ritmo, tipografía grande, animaciones). No se copió código, texto ni recursos.
 - **Datos:** las maquetas usan solo servicios, actividades y fechas ficticias. No hay datos personales ni de salud.
